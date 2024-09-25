@@ -1,113 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;700;800&display=swap');
 
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-
 }
 
-:root{
-    --primary-color: #1a233b;
-    --second-color: #ffffff;
-    --black-color: #000000;
+body {
+    background-color: #f6f6f6;
 }
 
-body{
-    background-image: url("img/COLLEGE OF COMPUTER STUDIES.png");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}   
-a{
-    text-decoration: none;
-    color: #ffffff;
-}
-a:hover{
-    text-decoration: underline;
-}
-
-.wrapper{
+.top-container {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    min-height: 100vh;
-    background-color: rgb(red, green, blue, 0.2);
 }
 
-.login_box{
-    position: relative;
-    width: 400px;
-    height: 400px;
-    background-color: #1a233b;
-    border: 2px solid var(--primary-color);
-    border-radius: 15px;
-    padding: 7.5em 2.5em 4em 2.5em;
-    color: var(--second-color);
-    box-shadow: 0px 0px 10px 2px rgb(red, green, blue);
+.top-above-rectangle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-image: linear-gradient(to right, #6b1e1e, #f88e34);
+    z-index: 1000;
+}
 
-}
-.login-header1{
+.top-rectangle {
     position: absolute;
-    top: 7px;
-    left: 250px;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    background-color: none;
-    width: 300px;
-    height: 55px;
-    font-size: small;
+    top: 5px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-image: linear-gradient(to right, #143180, #1a233b);
+    z-index: 999;
 }
-.custom-line {
-    position: absolute;
-    top: 70px;
-    align-items: center;
-    border: none;
-    border-top: 3px solid #27355b;
-    width: 80%;
-    margin: 0;
-    margin-bottom: 30px;
-    opacity: 100%;
-}
-.login-header2 {
-    position: relative;
-    top: -40px;
-    left:50%;
-    transform: translateX(-50%);
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    background-color: none;
-    width: 300px;
-    height: 55px;
-    font-size: 30px;
-    font-weight: 600;
-    font-style: bold;
-    line-height: 90%;
-}
-.custom-line2 {
-    position: absolute;
-    top: 70px;
-    align-items: center;
-    border: none;
-    border-top: 3px solid #27355b;
-    width: 80%;
-    margin: 0;
-    margin-bottom: 30px;
-    opacity: 100%;
-}
-.my-image {
-    position:absolute;
-    top: 10px;
-    left: 43px;
+
+.LSPUlogo, .CCSlogo {
+    position: absolute; 
+    top: 10px; 
+    z-index: 1001; 
     width: 50px;
+    height: 50px;
+}
+
+.LSPUlogo {
+    left: 20px; 
+}
+
+.CCSlogo {
+    left: 75px; 
+}
+
+.LSPUlogo img, .CCSlogo img {
+    width: 100%;
     height: auto;
-    border-radius: 10px; /* Adds rounded corners */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0); /* Adds shadow */
+}
+
+.LSPU-LB h1 {
+    color: #ffffff; 
+    text-align: left; 
+    margin: 5px; 
+    position: absolute; 
+    z-index: 1001; 
+    font-size: 20px;
+    left: 125px; 
+    top: 5px; 
+}
+
+.LSPU-LB h2 {
+    color: #ffffff; 
+    text-align: left; 
+    margin: 5px; 
+    position: absolute; 
+    z-index: 1001; 
+    font-size: 17px;
+    left: 125px; 
+    top: 30px; 
+}
+
+.top-next-rectangle {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-image: linear-gradient(to right, #6b1e1e, #f88e34);
+    z-index: 1000;
+}
+
+.lower-rectangle {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    z-index: 1000;
+    box-shadow: 0 2px 7px rgba(128, 128, 128, 0.5); 
+}
+
+.sidebar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 250px; /* Set a fixed width for the sidebar */
+    height: calc(100% - 70px); /* Adjust height to fit below the top bars */
+    background-color: #ffffff; 
+    transition: 0.5s;
+    overflow-x: hidden; 
+    padding-top: 10px; 
+    z-index: 1001; 
+}
+
+.sidebar a {
+    padding: 10px 15px; 
+    text-decoration: none; 
+    font-size: 10px; 
+    color: #818181; /* Change link color */
+    display: block; 
+    transition: 0.3s;
+}
+
+.closebtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    color: #f1f1f1;
+    padding: 10px;
+    border: 0;
+}
+
+.openbtn {
+    font-size: 10px;
+    cursor: pointer;
+    background-color: #111;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+}
+
+.sidebar a:hover {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: red;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+}
+
+.openbtn:hover {
+    background-color: #444;
+}
+
+/* Style for the main content area */
+#main {
+    transition: margin-left 0.5s; 
+    padding: 16px;
+    margin-left: 250px; /* Add margin to the left to accommodate the sidebar */
 }
