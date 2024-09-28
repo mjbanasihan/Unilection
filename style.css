@@ -23,6 +23,53 @@ header {
     width: 100%;
     height: 5px;
     background-image: linear-gradient(to right, #6b1e1e, #f88e34);
+    position: relative; 
+}
+
+.admin-icon {
+    background: none;
+    border: none;
+    cursor: pointer; 
+    outline: none; 
+    position: absolute; 
+    top: 15px; 
+    right: 20px; 
+    cursor: pointer; 
+}
+
+.dropdown-menu {
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    right: 0; 
+    background-color: #fff; 
+    border: 1px solid #ccc; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    z-index: 10; 
+}
+
+.admin-icon-container:hover .dropdown-menu {
+    display: block; /* Show dropdown on hover */
+}
+
+.dropdown-menu a {
+    display: block; /* Make links block elements */
+    padding: 10px; 
+    color: #000; 
+    text-decoration: none; 
+}
+
+.dropdown-menu a:hover {
+    background-color: #6b1e1e;
+    color: white;
+}
+
+.dropdown-menu.show {
+    display: block; /* Show dropdown when the class "show" is added */
+}
+
+.admin-icon:hover {
+    fill: #f88e34; /* Change color on hover if your SVG supports fill */
 }
 
 .LSPUlogo, .CCSlogo {
@@ -80,6 +127,7 @@ nav ul {
     height: 65px;
     list-style: none;
     margin-left: auto;
+    position: relative; /* Added for dropdown positioning */
 }
 
 nav li {
@@ -95,10 +143,11 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #f0f0f0;
+    background-color: #6b1e1e;
+    color: white;
 }
 
-.sidebar{
+.sidebar {
     position: fixed;
     top: 75px;
     right: 0;
@@ -114,31 +163,84 @@ nav a:hover {
     justify-content: flex-start;
 }
 
-.sidebarli{
+.sidebarli {
     width: 100%;
 }
 
-.sidebar a{
+.sidebar a {
     width: 100%;
 }
 
-.menu-button{
+.menu-button {
     display: none;
     margin-left: auto;
 }
 
-@media(max-width: 800px){
-    .hideOnMobile{
-     display: none;
-    }
-    .menu-button{
-        display: block;
-        position: absolute;
-        right: 15px;
-    }
+/* Dropdown styles */
+.dropdown {
+    display: none; /* Hidden by default */
+    position: absolute; /* Position it relative to the parent */
+    background-color: white; /* Background for dropdown */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    padding: 0; /* Remove padding */
+    margin-top: 0px; /* Space between the parent item and the dropdown */
+    z-index: 100; /* Ensure it's on top */
+    min-width: 140px; /* Set a minimum width for the dropdown */
+    min-height: 140px
 }
-@media(max-width: 400px){
-    .sidebar{
-     width: 100%;
+
+.hideOnMobile {
+    position: relative; /* Set relative positioning for dropdown */
+}
+
+.hideOnMobile:hover .dropdown {
+    display: block; /* Show dropdown on hover */
+}
+
+.dropdown li {
+    width: 90%; /* Ensure dropdown items take full width */
+}
+
+.dropdown a {
+    padding: 10px; /* Padding for dropdown items */
+    color: black; /* Text color */
+    display: block; /* Make the entire area clickable */
+}
+
+.dropdown a:hover {
+    background-color: #6b1e1e; /* Background color on hover */
+    color: white; /* Text color on hover */
+}
+/* Media queries for mobile responsiveness */
+@media (max-width: 768px) {
+    .admin-icon {
+        top: 10px; /* Adjust for smaller screen */
+        right: 10px; /* Adjust for smaller screen */
+    }
+
+    .LSPUlogo, .CCSlogo {
+        width: 40px; /* Smaller logos for mobile */
+        height: 40px;
+    }
+
+    .LSPU-LB {
+        padding-left: 10px; /* Reduce padding */
+        text-align: center; /* Center align text on mobile */
+        margin-top: 0; /* Reset margin */
+    }
+
+    .LSPU-LB h1, .LSPU-LB h2 {
+        font-size: 18px; /* Smaller text size */
+    }
+    .menu-button {
+        display: block; /* Show menu button on mobile */
+    }
+    
+    .hideOnMobile {
+        display: none; /* Hide normal menu items on mobile */
+    }
+
+    .sidebar {
+        display: flex; /* Show sidebar on mobile */
     }
 }
