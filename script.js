@@ -1,9 +1,22 @@
-function openNav() {
-    document.getElementById("sidebar").style.width = "250px"; // Open sidebar
-    document.getElementById("main").style.marginLeft = "250px"; // Adjust main content
+function showSidebar(){
+    const sidebar = document.querySelector('.sidebar')
+    sidebar.style.display = 'flex'
+}
+function hideSidebar(){
+    const sidebar = document.querySelector('.sidebar')
+    sidebar.style.display = 'none'
 }
 
-function closeNav() {
-    document.getElementById("sidebar").style.width = "0"; // Close sidebar
-    document.getElementById("main").style.marginLeft = "0"; // Reset main content margin
-}
+const adminIcon = document.querySelector('.admin-icon');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+
+adminIcon.addEventListener('click', () => {
+    dropdownMenu.classList.toggle('show');
+});
+
+// Close the dropdown if clicked outside
+document.addEventListener('click', (event) => {
+    if (!adminIcon.contains(event.target)) {
+        dropdownMenu.classList.remove('show');
+    }
+});
