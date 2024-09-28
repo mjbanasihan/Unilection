@@ -11,37 +11,23 @@ body {
     background-color: #f6f6f6;
 }
 
-.top-container {
-    position: fixed;
-    top: 0;
-    left: 0;
+header {
+    position: relative;
     width: 100%;
+    height: auto;
+    z-index: 999;
+    background-image: linear-gradient(to right, #143180, #1a233b);
 }
 
 .top-above-rectangle {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 5px;
     background-image: linear-gradient(to right, #6b1e1e, #f88e34);
-    z-index: 1000;
-}
-
-.top-rectangle {
-    position: absolute;
-    top: 5px;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background-image: linear-gradient(to right, #143180, #1a233b);
-    z-index: 999;
 }
 
 .LSPUlogo, .CCSlogo {
     position: absolute; 
     top: 10px; 
-    z-index: 1001; 
     width: 50px;
     height: 50px;
 }
@@ -59,113 +45,100 @@ body {
     height: auto;
 }
 
+.LSPU-LB {
+    padding-left: 140px; /* Keep this to position next to the logos */
+    padding-top: 0px; /* Reduce the padding to move it higher */
+    margin-top: 5px; /* Add a negative margin to lift it up further */
+}
+
 .LSPU-LB h1 {
-    color: #ffffff; 
-    text-align: left; 
-    margin: 5px; 
-    position: absolute; 
-    z-index: 1001; 
+    color: #ffffff;
     font-size: 20px;
-    left: 125px; 
-    top: 5px; 
 }
 
 .LSPU-LB h2 {
-    color: #ffffff; 
-    text-align: left; 
-    margin: 5px; 
-    position: absolute; 
-    z-index: 1001; 
+    color: #ffffff;
     font-size: 17px;
-    left: 125px; 
-    top: 30px; 
 }
 
 .top-next-rectangle {
-    position: absolute;
-    top: 65px;
-    left: 0;
     width: 100%;
     height: 5px;
     background-image: linear-gradient(to right, #6b1e1e, #f88e34);
-    z-index: 1000;
 }
 
-.lower-rectangle {
-    position: absolute;
-    top: 70px;
-    left: 0;
+nav {
     width: 100%;
-    height: 60px;
     background-color: #ffffff;
-    z-index: 1000;
-    box-shadow: 0 2px 7px rgba(128, 128, 128, 0.5); 
+    box-shadow: 0 2px 7px rgba(128, 128, 128, 0.5);
 }
 
-.sidebar {
+nav ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 65px;
+    list-style: none;
+    margin-left: auto;
+}
+
+nav li {
+    margin: 0 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    padding: 20px 15px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #f0f0f0;
+}
+
+.sidebar{
     position: fixed;
-    top: 70px;
-    left: 0;
-    width: 200px; /* Sidebar width */
-    height: calc(90% - 70px); /* Sidebar height */
-    background-color: #ffffff; 
-    transition: 0.5s;
-    overflow-x: hidden; 
-    padding-top: 10px; 
-    z-index: 1001; 
+    top: 75px;
+    right: 0;
+    height: 50vh;
+    width: 250px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.272);
+    backdrop-filter: blur(10px);
+    box-shadow: -10px 0 10px rgba(128, 128, 128, 0.1);
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
-.sidebar a {
-    padding: 20px 25px; /* Increase top/bottom padding */
-    text-decoration: none; 
-    font-size: 14px; /* Adjust font size as needed */
-    color: #818181; 
-    display: block; 
-    transition: 0.3s;
-    line-height: 20px; 
-    white-space: nowrap; 
+.sidebarli{
+    width: 100%;
 }
 
-.closebtn {
-    font-size: 0;
-    cursor: pointer;
-    background-color: transparent;
-    color: #f6f6f6;
-    padding: 10px;
-    border: 0;
+.sidebar a{
+    width: 100%;
 }
 
-.openbtn {
-    font-size: 10px; /* Size of the hamburger icon */
-    cursor: pointer;
-    background-color: #888; 
-    color: #f6f6f6;
-    padding: 10px 15px; 
-    border: none; 
-    border-radius: 5px; /* Rounded corners */
-    position: fixed; 
-    z-index: 1002; 
-    top: 80px; /* Adjust this value to lower the button */
-    left: 10px; 
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+.menu-button{
+    display: none;
+    margin-left: auto;
 }
 
-.openbtn:hover {
-    background-color: #f6f6f6; /* Darker gray on hover */
-    transform: scale(1.1); /* Slightly increase size on hover */
+@media(max-width: 800px){
+    .hideOnMobile{
+     display: none;
+    }
+    .menu-button{
+        display: block;
+        position: absolute;
+        right: 15px;
+    }
 }
-
-.sidebar a:hover {
-    font-size: 1.6em;
-    font-weight: bold;
-    color: rgb(255, 136, 0);
-    background-color: #f1f1f1;
-    border-radius: 8px;
-}
-
-/* Style for the main content area */
-#main {
-    transition: margin-left 0.5s; 
-    padding: 16px;
-    margin-left: 250px;
+@media(max-width: 400px){
+    .sidebar{
+     width: 100%;
+    }
 }
