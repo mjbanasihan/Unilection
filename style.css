@@ -15,9 +15,8 @@
     --second-color: #ffffff;
     --black-color: #000000;
 }
-
 body{
-    background-image: url("img/COLLEGE OF COMPUTER STUDIES.png");
+    background-image: url("img/1.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -30,12 +29,17 @@ a{
 a:hover{
     text-decoration: underline;
 }
+img {
+    width: 300px;
+    height: auto;
+  }
 
 .wrapper{
     width: 100%;
     display: flex;
     justify-content: right;
     align-items: center;
+    padding: 200px;
     min-height: 100vh;
     background-color: rgb(red, green, blue, 0.2);
 }
