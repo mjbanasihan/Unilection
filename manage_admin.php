@@ -7,6 +7,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+
 // Fetch admin data from the database
 $sql = "SELECT * FROM adminv"; // Change 'adminv' to your actual admin table name if necessary
 $result = mysqli_query($conn, $sql);
@@ -106,10 +107,11 @@ $result = mysqli_query($conn, $sql);
     <div class="admin-data">
             <h2>Admin Table</h2>
             <div class="search-bar">
-                <form action="manage_admin.php" method="GET">
+                <form action="manage_admin.php" method="GET" style="display: flex; align-items: center;">
                     <input type="text" name="search" placeholder="Search Admin..." required>
                     <button type="submit">Search</button>
                 </form>
+            </div>
             </div>
             <table>
                 <tr>
@@ -117,7 +119,8 @@ $result = mysqli_query($conn, $sql);
                     <th>Admin ID</th>
                     <th>Admin Name</th>
                     <th>Email</th>
-                    <th>Password</th> <!-- Added header for Password -->
+                    <th>Password</th>
+                    <th>Actions</th> <!-- Added header for Password -->
                 </tr>
                 <?php
                 // Check if a search query is set
@@ -133,25 +136,85 @@ $result = mysqli_query($conn, $sql);
                 $result = mysqli_query($conn, $sql);
 
                 // Check if there are results
-                if (mysqli_num_rows($result) > 0) {
-                    // Output data of each row
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
-                        echo "<td>" . $row['ID'] . "</td>"; // Correct key for ID
-                        echo "<td>" . $row['admin_id'] . "</td>"; // Correct key for Admin ID
-                        echo "<td>" . $row['admin_lastn'] . " " . $row['admin_firstn'] . " " . $row['admin_mi'] . "</td>"; // Full Admin Name
-                        echo "<td>" . $row['email'] . "</td>";
-                        echo "<td>" . $row['password'] . "</td>"; // Display password if needed
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='5'>No records found</td></tr>"; // Adjusted colspan to match your table structure
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['ID'] . "</td>";
+                    echo "<td>" . $row['admin_id'] . "</td>";
+                    echo "<td>" . $row['admin_lastn'] . " " . $row['admin_firstn'] . " " . $row['admin_mi'] . "</td>";
+                    echo "<td>" . $row['email'] . "</td>";
+                    echo "<td>" . $row['password'] . "</td>";
+                    echo "<td>
+                            <button class='btn update-btn' onclick=\"updateRow(" . $row['ID'] . ", '" . addslashes($row['admin_id']) . "', '" . addslashes($row['admin_lastn']) . "', '" . addslashes($row['admin_firstn']) . "', '" . addslashes($row['admin_mi']) . "', '" . addslashes($row['email']) . "', '" . addslashes($row['password']) . "')\">Update</button>
+                            <button class='btn remove-btn' onclick=\"removeRow(" . $row['ID'] . ")\">Remove</button>
+                        </td>";
+                    echo "</tr>";
                 }
                 ?>
             </table>
         
         </div>
     <div>
-    <script src="script.js"></script>
+
+    <div id="updateModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Update Admin Details</h2>
+        <form id="updateForm" method="POST" action="update_admin.php">
+            <input type="hidden" id="modal_id" name="id"> <!-- Hidden ID -->
+            <input type="hidden" id="modal_admin_id" name="admin_id"> <!-- Hidden Admin ID -->
+            
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="modal_last_name" name="admin_lastn" required><br>
+            
+            <label for="first_name">First Name:</label>
+            <input type="text" id="modal_first_name" name="admin_firstn" required><br>
+            
+            <label for="middle_initial">Middle Initial:</label>
+            <input type="text" id="modal_middle_initial" name="admin_mi"><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="modal_email" name="email" required><br>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="modal_password" name="password" required><br>
+            
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</div> 
+<!-- Add Admin Modal -->
+
+<script>
+var modal = document.getElementById('updateModal'); // Ensure this points to the correct modal ID
+var span = document.getElementsByClassName('close')[0]; // Close button
+
+// Function to open modal with pre-filled values
+function updateRow(id, admin_id, last_name, first_name, middle_initial, email, password) {
+    console.log('Opening modal...'); // Check if this logs to the console when you click update
+
+    document.getElementById('modal_id').value = id;
+    document.getElementById('modal_admin_id').value = admin_id;
+    document.getElementById('modal_last_name').value = last_name;
+    document.getElementById('modal_first_name').value = first_name;
+    document.getElementById('modal_middle_initial').value = middle_initial;
+    document.getElementById('modal_email').value = email;
+    document.getElementById('modal_password').value = password;
+
+    modal.style.display = 'block'; // Ensure this is executed correctly
+}
+
+// Close the modal when user clicks the "x"
+span.onclick = function() {
+    modal.style.display = 'none';
+}
+
+// Close the modal when user clicks outside of the modal content
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+</script>
+<script src="script.js">
 </body>
 </html>
