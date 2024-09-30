@@ -44,6 +44,7 @@ a:hover{
     padding: 200px;
     min-height: 100vh;
     background-color: rgb(red, green, blue, 0.2);
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
 }
 
 .login_box{
@@ -161,4 +162,13 @@ form{
     background-color: #d87f2e;
     color: #ffffff;
     background-image: linear-gradient(to right, #D47028, #A32C1F);
+    font-size: x-large;
+    width: 300px;
+    height: 40px;
+    border-radius: 30px;
+}
+.forgot{
+    font-size: x-small;
+    position: relative;
+    right: -90px;
 }
