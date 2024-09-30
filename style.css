@@ -147,11 +147,18 @@ a:hover{
 }
 form{
     display: flex;
-
     justify-content: center;
     align-items: center; 
     height: 100vh; 
     flex-direction: column;
     position: relative;
     top: -370px;
+}
+.input-submit{
+    position: relative;
+    top: 10px;
+    cursor: pointer;
+    background-color: #d87f2e;
+    color: #ffffff;
+    background-image: linear-gradient(to right, #D47028, #A32C1F);
 }
