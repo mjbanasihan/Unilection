@@ -29,10 +29,12 @@ a{
 a:hover{
     text-decoration: underline;
 }
-img {
-    width: 300px;
-    height: auto;
-  }
+.ccspic{
+    position:absolute;
+    top: 120px;
+    left: 185px;
+    width: 500px;
+}
 
 .wrapper{
     width: 100%;
@@ -142,4 +144,14 @@ img {
     margin: 0;
     margin-bottom: 30px;
     opacity: 100%;
+}
+form{
+    display: flex;
+
+    justify-content: center;
+    align-items: center; 
+    height: 100vh; 
+    flex-direction: column;
+    position: relative;
+    top: -370px;
 }
