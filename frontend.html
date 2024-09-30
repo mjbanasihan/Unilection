@@ -6,56 +6,113 @@
     <title>CCS Election Announcement</title>
     <link rel="stylesheet" href="frontend.css">
     <style>
-        /* Inline CSS for profile icon */
+        /* Button Styles */
+        .button {
+            display: inline-block;
+            padding: 8px 15px; /* Reduced padding for smaller buttons */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 5px 0; /* Add margin for spacing between buttons */
+        }
+
+        /* Unique button styles */
+        #button-home {
+            background-color: #8b2324;
+        }
+
+        #button-vote {
+            background-color: #ffffff;
+        }
+
+        #cta-button {
+            background-color: #8b2324;
+        }
+
+        #download-button {
+            background-color: #8b2324; /* Match the color with File your Candidacy button */
+        }
+
+        /* Hover Effects */
+        #button-home:hover {
+            background-color: darkred;
+        }
+
+        #button-vote:hover {
+            background-color: #8b2324;
+        }
+
+        #cta-button:hover {
+            background-color: #8b2324;
+        }
+
+        #download-button:hover {
+            background-color: darkred; /* Change hover color for download button */
+        }
+
+        /* Profile Icon */
         .profile-icon {
-            width: 50px; /* Smaller width */
-            height: 50px; /* Smaller height */
-            border-radius: 50%; /* Make it circular */
-            object-fit: cover; /* Ensure the image fits within the circle */
-            position: absolute; /* Position it relative to the page */
-            top: 20px; /* Distance from the top of the page */
-            right: 20px; /* Distance from the right side of the page */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add a shadow to make it stand out */
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         /* Background for the body */
         body {
             background-image: url('COLLEGE OF COMPUTER STUDIES.jpg'); /* Path to your background image */
-            background-size: cover; /* Cover the entire page */
-            background-position: center; /* Center the background */
-            background-repeat: no-repeat; /* Prevent the image from repeating */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         /* Navigation Styles */
         nav {
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for contrast */
-            padding: 10px; /* Space around the navigation items */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: add shadow for depth */
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         nav ul {
-            list-style: none; /* Remove bullet points */
-            display: flex; /* Align items horizontally */
-            justify-content: space-around; /* Space items evenly */
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
         }
 
         nav li {
-            margin: 0 15px; /* Space between items */
+            margin: 0 15px;
         }
 
         nav a {
-            text-decoration: none; /* Remove underline from links */
-            color: #333; /* Dark color for text */
-            font-weight: bold; /* Make text bold */
-            padding: 10px 15px; /* Space inside the button */
-            border-radius: 5px; /* Rounded corners */
-            transition: background-color 0.3s; /* Smooth transition for hover effect */
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
 
-        nav a:hover {
-            background-color: #ddd; /* Change background color on hover */
+        /* Date display styling */
+        .date-display {
+            font-size: 16px;
+            color: #333;
+            margin-right: 15px;
+        }
+
+        /* Centering the buttons */
+        .center-container {
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            align-items: center; /* Center the buttons */
+            margin: 20px 0; /* Add margin for spacing */
         }
     </style>
 </head>
@@ -67,13 +124,15 @@
             <div class="logo">
                 <img src="logo1.jpg" alt="logo1">
                 <img src="logo2.jpg" alt="logo2">
+                <div class="logo-text">
+                </div>
             </div>
 
             <!-- Profile Icon -->
             <img src="profile.jpg" alt="Profile Icon" class="profile-icon">
 
             <div class="LSPU-LB">
-                <h1>Laguna State Polytechnic University</h1>
+                <h1>Laguna State Polytechnic University - Los Baños Campus</h1>
                 <h2>College of Computer Studies</h2>
             </div>
         
@@ -84,49 +143,55 @@
         <div class="top-next-rectangle"></div>
         <div class="lower-rectangle"></div>
 
+        <!-- Navigation Bar with Date -->
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Vote</a></li>
+                <li><a href="#" class="button" id="button-home">Home</a></li>
+                <li><a href="#" class="button" id="button-vote">Vote</a></li>
             </ul>
+            <div class="date-display">mm/dd/yyyy</div> <!-- Date Display -->
         </nav>
-        <div class="date-display">mm/dd/yyyy</div>
 
+        <!-- Announcement Section -->
         <div class="announcement">
-            <h1>ANNOUNCEMENT</h1>
-            <h2>Election for the Next Student Leaders of the College of Computer Studies</h2>
-
-            <div class="event-container">
-                <div class="event">
-                    <div class="event-date">
-                        <p>September</p>
-                        <h3>2-8</h3>
-                        <p>2024</p>
-                    </div>
-                    <div class="event-info">
-                        <h3>Filing of Candidacy</h3>
-                    </div>
+            <p class="announcement-heading">Announcement:</p>
+            <p class="election-text">Election for the Next Student Leaders of the College of Computer Studies</p>
+        </div>
+        
+        <div class="event-container">
+            <div class="event">
+                <div class="event-date">
+                    <p>September</p>
+                    <h3>2-8</h3>
+                    <p>2024</p>
                 </div>
-
-                <div class="event">
-                    <div class="event-date">
-                        <p>September</p>
-                        <h3>9</h3>
-                        <p>2024</p>
-                    </div>
-                    <div class="event-info">
-                        <h3>Screening of Qualified Candidates</h3>
-                        <p>CCS Dean's Office @ 1:00 PM</p>
-                    </div>
+                <div class="event-info">
+                    <h3>Filing of Candidacy</h3>
                 </div>
             </div>
 
-            <a href="#" class="cta-button">File your Candidacy</a>
+            <div class="event">
+                <div class="event-date">
+                    <p>September</p>
+                    <h3>9</h3>
+                    <p>2024</p>
+                </div>
+                <div class="event-info">
+                    <h3>Screening of Qualified Candidates</h3>
+                    <p>CCS Dean's Office @ 1:00 PM</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Centered Buttons in the Same Container -->
+        <div class="center-container">
+            <a href="#" class="button" id="cta-button">File your Candidacy</a>
+            <a href="path/to/application-form.pdf" class="button" id="download-button">Download PDF Application Form</a>
         </div>
     </div>
 
     <script>
-        document.querySelector('.cta-button').addEventListener('click', function(e) {
+        document.querySelector('#cta-button').addEventListener('click', function(e) {
             e.preventDefault();
             alert('Thank you for your interest! The application form will be available soon.');
         });
