@@ -104,15 +104,22 @@ $result = mysqli_query($conn, $sql);
     </nav>
 
     <!-- Table to display database results -->
-    <div class="admin-data">
-            <h2>Admin Table</h2>
+    <<div class="admin-data">
+        <h2>Admin Table</h2>
+
+        <!-- Flex container for search bar and Add Admin button -->
+        <div class="action-bar">
             <div class="search-bar">
                 <form action="manage_admin.php" method="GET" style="display: flex; align-items: center;">
                     <input type="text" name="search" placeholder="Search Admin..." required>
                     <button type="submit">Search</button>
                 </form>
+                <button id="addAdminBtn" class="add-admin-btn">Add Admin</button>
             </div>
-            </div>
+        </div>
+    <div>
+    <div>
+        </div>
             <table>
                 <tr>
                     <th>ID</th>
@@ -181,8 +188,46 @@ $result = mysqli_query($conn, $sql);
             <button type="submit">Update</button>
         </form>
     </div>
-</div> 
+</div>
+
 <!-- Add Admin Modal -->
+<div id="addAdminModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add Admin</h2>
+        <form id="addAdminForm" method="POST" action="add_admin.php">
+            <label for="admin_id">Admin ID:</label>
+            <input type="text" id="admin_id" name="admin_id" required><br>
+
+            <label for="admin_lastn">Last Name:</label>
+            <input type="text" id="admin_lastn" name="admin_lastn" required><br>
+
+            <label for="admin_firstn">First Name:</label>
+            <input type="text" id="admin_firstn" name="admin_firstn" required><br>
+
+            <label for="admin_mi">Middle Initial:</label>
+            <input type="text" id="admin_mi" name="admin_mi"><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+
+            <button type="submit">Add Admin</button>
+        </form>
+    </div>
+</div>
+
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeDeleteModal">&times;</span>
+        <h2>Confirm Deletion</h2>
+        <p>Are you sure you want to delete this admin?</p>
+        <button id="confirmDeleteBtn">Yes, delete</button>
+        <button id="cancelDeleteBtn">Cancel</button>
+    </div>
+</div>
 
 <script>
 var modal = document.getElementById('updateModal'); // Ensure this points to the correct modal ID
@@ -215,6 +260,81 @@ window.onclick = function(event) {
     }
 }
 </script>
+
+
+<script>
+// Get modal and button elements for adding admin
+var addModal = document.getElementById('addAdminModal');
+var addBtn = document.getElementById('addAdminBtn');
+var closeAddBtn = document.querySelector('#addAdminModal .close'); // Use a query selector to target the correct close button
+
+// Open add admin modal when button is clicked
+addBtn.onclick = function() {
+    addModal.style.display = 'block';
+}
+
+// Close add admin modal when "x" is clicked
+closeAddBtn.onclick = function() {
+    addModal.style.display = 'none';
+}
+
+// Close update admin modal when "x" is clicked
+closeUpdateBtn.onclick = function() {
+    updateModal.style.display = 'none';
+}
+
+// Close modal when clicking outside of modal content
+window.onclick = function(event) {
+    if (event.target == addModal) {
+        addModal.style.display = 'none';
+    }
+    if (event.target == updateModal) {
+        updateModal.style.display = 'none';
+    }
+}
+</script>
+
+<script>
+var deleteModal = document.getElementById('deleteModal');
+var closeDeleteBtn = document.getElementById('closeDeleteModal');
+var confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+var deleteId = null; // Variable to hold the ID of the admin to delete
+
+function removeRow(id) {
+    deleteId = id; // Store the ID to delete
+    deleteModal.style.display = 'block'; // Show the confirmation modal
+}
+
+// Close the delete modal when "x" is clicked
+closeDeleteBtn.onclick = function() {
+    deleteModal.style.display = 'none';
+}
+
+// Confirm deletion
+confirmDeleteBtn.onclick = function() {
+    var formData = new FormData();
+    formData.append('delete_id', deleteId);
+
+    fetch('remove_admin.php', { 
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        location.reload(); // Refresh the page to see the changes
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Close modal when clicking outside of modal content
+window.onclick = function(event) {
+    if (event.target == deleteModal) {
+        deleteModal.style.display = 'none';
+    }
+}
+</script>
+
 <script src="script.js">
 </body>
 </html>
