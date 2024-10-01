@@ -1,0 +1,235 @@
+.student-data h2 {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 40px;
+    color: #6b1e1e;
+}
+
+.student-bar {
+    display: flex;
+    justify-content: center; /* Centers all items horizontally */
+    align-items: center; /* Aligns items vertically center */
+    margin-bottom: 20px;
+}
+
+/* Search bar styling */
+.student-bar form {
+    display: flex;
+    align-items: center; /* Ensures items are vertically aligned */
+}
+
+.student-bar input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 300px; /* Adjust the width as needed */
+    margin-right: 10px; /* Space between input and search button */
+}
+
+.search-btn {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #6b1e1e; /* Dark red for Search button */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.search-btn:hover {
+    background-color: #4a1313;
+}
+
+/* Add Student button styling */
+.add-student {
+    display: flex; /* Ensure flex for alignment */
+    align-items: center; /* Align vertically with the Search button */
+    margin-left: 10px; /* Space between Search button and Add Student button */
+}
+
+.add-stud-btn {
+    background-color: orange;
+    color: white;
+    padding: 8px 16px; /* Match padding to Search button */
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.add-stud-btn:hover {
+    background-color: #cc8400;
+}
+
+.dropdown-menu {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    right: 10px; /* Adjust positioning as needed */
+    top: 50px;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    margin-right: 10px;
+}
+
+.dropdown-menu a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* Modal background */
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed;
+    z-index: 1000; /* Higher z-index to ensure it's on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.6); /* Darker background for a more pronounced overlay effect */
+    backdrop-filter: blur(5px); /* Adds a subtle blur effect to the background */
+    padding-top: 60px;
+    transition: opacity 0.3s ease; /* Smooth fade-in transition */
+}
+
+
+/* Modal content */
+.modal-content {
+    background-color: #fff;
+    margin: auto; /* Center horizontally */
+    padding: 20px;
+    border-radius: 8px; /* Adds rounded corners for a modern look */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow for depth */
+    width: 40%; /* Adjust this width as needed */
+    max-height: 80vh; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    animation: modalFadeIn 0.5s ease; /* Adds a fade-in animation */
+}
+
+.modal-content h2{
+    text-align: center; /* Center the heading */
+    padding: 10px;
+    font-size: 30px;
+    color: #6b1e1e;
+}
+
+/* Keyframes for modal fade-in animation */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Inputs and Labels styling */
+.modal-content label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+/* Update button styling */
+.modal-content button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.modal-content button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+
+/* For smaller screens */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        width: 90%; /* Full width for smaller devices */
+    }
+}
+
+
+/* Close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: -10px;
+}
+
+.close:hover,
+.close:focus {
+    color: #333; /* Darker hover color for better visibility */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.action-buttons {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center buttons horizontally */
+    gap: 10px; /* Space between buttons */
+}
+
+.btn {
+    padding: 8px 12px; /* Adjust padding for button size */
+    font-size: 14px; /* Font size */
+    font-weight: bold; /* Bold text */
+    border-radius: 4px; /* Rounded corners */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.update-btn {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+}
+
+.update-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Remove Button Styles */
+.remove-btn {
+    background-color: #f44336; /* Red background */
+    color: white; /* White text */
+    margin-left: 10px; /* Space between buttons */
+}
+
+.remove-btn:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .btn {
+        padding: 6px 6px; /* Smaller padding for mobile */
+        font-size: 12px; /* Smaller font size for mobile */
+    }
+}
+
