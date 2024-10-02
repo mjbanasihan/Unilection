@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS Student Council Election</title>
+    <link rel="stylesheet" href="voting.css">
+    <style>
+        /* Add background image to the election title section */
+        .election-title {
+            background-image: url('COLLEGE OF COMPUTER STUDIES.jpg'); /* Add your image path here */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for a better look */
+            color: white; /* Change text color to white to contrast the background */
+        }
+
+        .election-title h1, .election-title h2, .election-title p {
+            margin: 10px 0;
+        }
+
+        /* Add styles for LSPU and CCS titles */
+        .LSPU-title {
+            font-size: 16px; /* Adjust this size to change LSPU title size */
+            color: #ffffff; /* Optional color adjustment */
+            margin: 0; /* Remove default margin */
+        }
+
+        .CCS-title {
+            font-size: 15px; /* Adjust this size to change CCS title size */
+            color: #ffffff; /* Optional color adjustment */
+            margin: 0; /* Remove default margin */
+        }
+    </style>
+</head>
+<body>
+    <div class="top-container">
+        <div class="top-above-rectangle"></div>
+        
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="logo1.jpg" alt="logo1">
+                    <img src="logo2.jpg" alt="logo2">
+                </div>
+        
+                <!-- Text beside Logos -->
+                <div class="logo-text">
+                    <h2 class="LSPU-title">Laguna State Polytechnic University - Los Baños Campus</h2>
+                    <h2 class="CCS-title">College of Computer Studies</h2>
+                </div>
+            </div>
+
+            <!-- Profile Icon -->
+            <img src="profile.jpg" alt="Profile Icon" class="profile-icon">
+        
+            <div class="top-next-rectangle"></div>
+        </header>   
+        
+        <div class="top-rectangle"></div>
+        <div class="top-next-rectangle"></div>
+        <div class="lower-rectangle"></div>
+    
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#" class="active">Vote</a></li>
+            </ul>
+            <span>mm/dd/yyyy</span>
+        </nav>
+        
+        <div class="election-title">
+            <h1>COLLEGE OF COMPUTER STUDIES - STUDENT COUNCIL</h1>
+            <h2>ELECTION</h2>
+            <p>UNTIL 5 PM ONLY</p>
+        </div>
+        
+        <form id="votingForm">
+            <div class="positions">
+                <div class="position">
+                    <div class="position-title">PRESIDENT</div>
+                    <div class="candidate">
+                        <label>
+                            <input type="radio" name="president" value="MENDEZ, RODA">
+                            MENDEZ, RODA
+                        </label>
+                        <div class="party">BYTE Partylist</div> <!-- Moved here -->
+                    </div>
+                    <div class="candidate">
+                        <label>
+                            <input type="radio" name="president" value="REYES, ROXANNE">
+                            REYES, ROXANNE
+                        </label>
+                        <div class="party">ALERT Partylist</div> <!-- Moved here -->
+                    </div>
+                </div>
+                <div class="position">
+                    <div class="position-title">VICE PRESIDENT</div>
+                    <div class="candidate">
+                        <label>
+                            <input type="radio" name="vicepresident" value="LEONARDO, JOSEF">
+                            LEONARDO, JOSEF
+                        </label>
+                        <div class="party">BYTE Partylist</div> <!-- Moved here -->
+                    </div>
+                    <div class="candidate">
+                        <label>
+                            <input type="radio" name="vicepresident" value="MALIKSI, RACHEL">
+                            MALIKSI, RACHEL
+                        </label>
+                        <div class="party">ALERT Partylist</div> <!-- Moved here -->
+                    </div>
+                </div>
+                <div class="position">
+                    <div class="position-title">EXECUTIVE SECRETARY</div>
+                    <div class="candidate">
+                        <label>
+                            <input type="radio" name="execsecretary" value="BUAT, NORHAIMA">
+                            BUAT, NORHAIMA
+                        </label>
+                        <div class="party">BYTE Partylist</div> <!-- Moved here -->
+                    </div>
+                    <div class="candidate">
+                        <label>
+                            <input type="radio" name="execsecretary" value="BALOGO, CHRIS">
+                            BALOGO, CHRIS
+                        </label>
+                        <div class="party">INDEPENDENT</div> <!-- Moved here -->
+                    </div>
+                </div>
+            </div>
+        </form>
+    
+    <!-- Submit Button -->
+    <button type="submit" class="submit-btn">Submit Vote</button>
+
+    <!-- JavaScript for Form Submission -->
+    <script>
+        document.getElementById('votingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for voting! Your vote has been recorded.');
+        });
+    </script>
+</body>
+</html>
