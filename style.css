@@ -1,3 +1,5 @@
+
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 *{
@@ -42,20 +44,18 @@ a:hover{
     padding: 200px;
     min-height: 100vh;
     background-color: rgb(red, green, blue, 0.2);
-    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
 }
 
 .login_box{
     position: relative;
     width: 400px;
-    height: 400px;
+    height: 360px;
     background-color: #1a233b;
     border: 2px solid var(--primary-color);
     border-radius: 15px;
     padding: 7.5em 2.5em 4em 2.5em;
     color: var(--second-color);
-    box-shadow: 0px 0px 10px 2px rgb(red, green, blue);
-
+    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.3);
 }
 .LSPU{
     position: absolute;
@@ -148,14 +148,48 @@ form{
     display: flex;
     justify-content: center;
     align-items: center; 
-    height: 100vh; 
+    height: 50px; 
     flex-direction: column;
     position: relative;
-    top: -370px;
+
+}
+.input_box1 input{
+    position: relative;
+    width: 300px;
+    padding: 10px;
+    padding-left: 20px; 
+    box-sizing: border-box;
+    border-radius: 51px;
+    margin: 5px;
+}
+.input_box1 label{
+    position: absolute;
+    left: 10px;
+    top: 300px;
+    transform: translateY(-50%);
+    color: gray;
+    pointer-events: none; 
+}
+
+.input_box2 input{
+    width: 300px;
+    padding: 10px;
+    padding-left: 20px; 
+    box-sizing: border-box;
+    border-radius: 51px;
+    margin: 5px;
+}
+.input_box2 label{
+    position: absolute;
+    left: 10px;
+    top: 300px;
+    transform: translateY(-50%);
+    color: gray;
+    pointer-events: none; 
 }
 .input-submit{
     position: relative;
-    top: 10px;
+    margin-top: 10px;
     cursor: pointer;
     background-color: #d87f2e;
     color: #ffffff;
@@ -163,10 +197,12 @@ form{
     font-size: x-large;
     width: 300px;
     height: 40px;
-    border-radius: 30px;
+    border-radius: 51px;
+    border-color: #ffffff;
 }
 .forgot{
     font-size: x-small;
     position: relative;
+    top: 0px;
     right: -90px;
 }
