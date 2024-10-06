@@ -47,7 +47,7 @@ a:hover{
 .login_box{
     position: relative;
     width: 400px;
-    height: 360px;
+    height: 390px;
     background-color: #1a233b;
     border: 2px solid var(--primary-color);
     border-radius: 15px;
@@ -162,6 +162,24 @@ a:hover{
     text-align: center;
     justify-content: center;
     font-size: x-small;
-    line-height: 90%;
+    line-height: 100%;
     margin-top: 10px;
+}
+.input_box input{
+    position: relative;
+    top: -50px;
+    width: 300px;
+    padding: 10px;
+    padding-left: 20px; 
+    box-sizing: border-box;
+    border-radius: 51px;
+    margin: 5px;
+}
+.input_box label{
+    position: absolute;
+    left: 10px;
+    top: 300px;
+    transform: translateY(-50%);
+    color: gray;
+    pointer-events: none; 
 }
