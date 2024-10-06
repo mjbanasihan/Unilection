@@ -154,3 +154,14 @@ a:hover{
     font-style: bold;
     line-height: 90%;
 }
+.details{
+    position: relative;
+    top: -60px;
+    color: #d87f2e;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-size: x-small;
+    line-height: 90%;
+    margin-top: 10px;
+}
