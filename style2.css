@@ -165,6 +165,15 @@ a:hover{
     line-height: 100%;
     margin-top: 10px;
 }
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 50px; 
+    flex-direction: column;
+    position: relative;
+    top: 25px;
+}
 .input_box input{
     position: relative;
     top: -50px;
@@ -182,4 +191,20 @@ a:hover{
     transform: translateY(-50%);
     color: gray;
     pointer-events: none; 
+}
+.input-submit{
+    position: relative;
+    top: -50px;
+    right: ;
+    margin-top: 10px;
+    display: flex;
+    cursor: pointer;
+    background-color: #d87f2e;
+    color: #ffffff;
+    background-image: linear-gradient(to right, #D47028, #A32C1F);
+    font-size: x-large;
+    width: 300px;
+    height: 40px;
+    border-radius: 51px;
+    border-color: #ffffff;
 }
