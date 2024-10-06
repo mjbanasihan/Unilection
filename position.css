@@ -1,0 +1,192 @@
+/* Title styling */
+.dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute; /* Position relative to the nearest positioned ancestor */
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    right: 10px; /* Adjust as needed */
+    top: 50px; /* Adjust as needed */
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.dropdown-menu.show {
+    display: block; /* Show when 'show' class is added */
+}
+
+.position h2 {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 40px;
+    color: #6b1e1e;
+}
+
+.add-pos {
+    margin-left: 1390px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: #0b71de; 
+    color: white; 
+    border: none; 
+    width: 40px; 
+    height: 40px; 
+    font-size: 24px; 
+    cursor: pointer; 
+    border-radius: 20%; 
+    transition: background-color 0.3s; 
+}
+
+.add-pos:hover {
+    background-color: #f88e34; 
+}
+
+table {
+    width: 50%; 
+    border-collapse: collapse; 
+    margin: 10px auto; 
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2); /* Add shadow effect */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    overflow: hidden; /* Prevents child elements from overflowing the rounded corners */
+}
+
+th, td {
+    border: 1px solid #ddd; /* Adds a light gray border */
+    padding: 10px; /* Adds padding inside table cells */
+    text-align: left; /* Aligns text to the left */
+}
+
+th {
+    background-color: #f2f2f2; 
+}
+
+tr:hover {
+    background-color: #f1f1f1; 
+}
+
+.btn {
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 10px;
+    color: white;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.edit-btn {
+    background-color: #cc8400; /* Bootstrap Primary Color */
+}
+
+.delete-btn {
+    background-color: #6b1e1e; /* Bootstrap Danger Color */
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px; /* Set a maximum width */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-top: 10px;
+}
+
+form input {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.submit-btn {
+    background-color: #28a745; /* Bootstrap success color */
+    color: white;
+    padding: 10px 15px; /* Top/bottom and left/right padding */
+    border: none;
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.submit-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.submit-btn:disabled {
+    background-color: #c6e1b6; /* Light green when disabled */
+    cursor: not-allowed; /* Change cursor when disabled */
+}
+
+.delete-btn, .cancel-btn {
+    padding: 8px 12px; /* Adjust padding for a better appearance */
+    border-radius: 10px; /* Makes the buttons rounded */
+    border: none; /* Removes default border */
+    font-size: 14px; /* Adjust font size */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s; /* Transition effect for hover */
+}
+
+/* Style for delete button */
+.delete-btn {
+    background-color: #6b1e1e; /* Bootstrap Danger Color */
+    color: white; /* Text color */
+}
+
+.delete-btn:hover {
+    background-color: #b01717; /* Darker shade on hover */
+}
+
+/* Style for cancel button */
+.cancel-btn {
+    background-color: #ccc; /* Light gray background */
+    color: black; /* Text color */
+}
+
+.cancel-btn:hover {
+    background-color: #bbb; /* Darker shade on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    /* Stack table rows on smaller screens */
+    table {
+        display: block;
+        overflow-x: auto; /* Allow horizontal scroll */
+    }
+}
