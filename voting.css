@@ -1,0 +1,202 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px; /* Increased border radius for rounded edges */
+}
+
+header {
+    background-color: #003366;
+    color: white;
+    padding: 10px;
+    display: flex; /* Added flex display for header */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space items apart */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center; /* Center items in the logo container */
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.logo-text {
+    text-align: center; /* Center the text in the logo-text container */
+}
+
+.logo-text h1 {
+    color: #ffffff;
+    font-size: 16px; /* Default font size */
+    margin: 0; /* Remove default margin */
+}
+
+/* Specific font sizes for LSPU and College of Computer Studies */
+.LSPU-title, .CCS-title {
+    font-size: 15px; /* Adjust as needed */
+    color: #ffffff; /* White color */
+    margin: 0; /* Remove default margin */
+}
+
+nav {
+    background-color: #f0f0f0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.active {
+    background-color: #8b0000;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px; /* Rounded corners for active link */
+}
+
+.election-title {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.election-title h1 {
+    font-size: 26px;
+    color: #000000;
+}
+
+.election-title h2 {
+    font-size: 87.4px;
+    color: #8b2324;
+}
+
+.election-title p {
+    font-size: 19.3px;
+    color: #000000;
+    font-style: italic; /* Corrected */
+}
+
+.positions {
+    display: flex;
+    justify-content: space-between; /* Changed to space-between for equal spacing */
+    padding: 20px;
+}
+
+.position {
+    width: 30%;
+    background-color: #f2f2f2; /* Added white background */
+    border-radius: 15px; /* Increased border radius for rounded edges */
+    padding: 10px; /* Added padding */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.position-title {
+    background-color: #e67300;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 15px 15px 0 0; /* Rounded top corners */
+}
+
+.candidate {
+    background-color: #f5eded;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px; /* Slight rounding of candidate boxes */
+    text-align: center; /* Center text in candidate box */
+}
+
+.candidate label {
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+}
+
+.candidate input[type="radio"] {
+    margin-right: 10px;
+}
+
+.party {
+    font-size: 0.8em;
+    color: #8b2324; /* Updated to the new color */
+    text-align: center; /* Center-align party name */
+}
+
+/* Center alignment for college text */
+.LSPU-LB {
+    text-align: center; /* Center-align text within this container */
+}
+
+.LSPU-LB h1, .LSPU-LB h2 {
+    margin: 0; /* Remove default margin for the h1 and h2 */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .position {
+        width: 100%; /* Full width on smaller screens */
+    }
+}
+
+/* Profile Icon */
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute; /* Position the profile icon */
+    top: 20px;
+    right: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Submit Button Styling */
+.submit-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #8b2324;
+    color: white;
+    border: none;
+    border-radius: 15px; /* Increased border radius for rounded edges */
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Additional Rectangle at the top */
+.top-above-rectangle {
+    width: 100%;
+    height: 5px;
+    background-image: linear-gradient(to right, #6b1e1e, #f88e34);
+}
