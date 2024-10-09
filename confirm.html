@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Vote Confirmation - CCS Election</title>
+    <link rel="stylesheet" href="confirmation.css">
+</head>
+<body>
+    <div class="top-container">
+        <div class="top-above-rectangle">
+            <header>
+                <div class="logo-title">
+                    <img src="logo1.jpg" alt="LSPU Logo" class="logo">
+                    <img src="logo2.jpg" alt="CCS Logo" class="logo">
+                    <div class="title">
+                        Laguna State Polytechnic University - Los Baños Campus<br>
+                        College of Computer Studies
+                    </div>
+                </div>
+                <img src="profile.jpg" alt="Profile" class="profile-icon">
+            </header>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#" class="active">Vote</a></li>
+                </ul>
+                <span>mm/dd/yyyy</span>
+            </nav>
+            <div class="vote-confirmation">
+                <div class="vote-title-container">
+                    <div class="vote-title">YOUR VOTE</div>
+                </div>
+                <div class="vote-details">
+                    <div class="vote-row president"><span class="position">PRESIDENT:</span><span class="candidate">MENDEZ, RODA</span></div>
+                    <div class="vote-row"><span class="position">VICE PRESIDENT:</span><span class="candidate">LEONARDO, JOSEF</span></div>
+                    <div class="vote-row executive-secretary"><span class="position">EXECUTIVE SECRETARY:</span><span class="candidate">BUAT, NORHAIMA</span></div>
+                    <div class="vote-row"><span class="position">RECORDING SECRETARY:</span><span class="candidate">BANASIHAN, MERLYN</span></div>
+                    <div class="vote-row auditor"><span class="position">AUDITOR:</span><span class="candidate">ALCARAZ, DAREL</span></div>
+                    <div class="vote-row"><span class="position">PIO:</span><span class="candidate">UMALI, CRISELLE</span></div>
+                    <div class="vote-row creative-designer"><span class="position">CREATIVE DESIGNER:</span><span class="candidate">BANASIHAN, XAILAH</span></div>
+                    <div class="vote-row"><span class="position">EVENT COORDINATOR:</span><span class="candidate">MALIKSI, RACHEL</span></div>
+                </div>
+                
+                <!-- Buttons Section -->
+                <div class="buttons align-right-buttons">
+                    <button class="btn-back">Back</button>
+                    <button class="btn-submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.btn-submit').addEventListener('click', function() {
+            alert('Your vote has been submitted successfully!');
+        });
+        document.querySelector('.btn-back').addEventListener('click', function() {
+            alert('Returning to voting page...');
+        });
+    </script>
+</body>
+</html>
