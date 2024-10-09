@@ -200,3 +200,26 @@ nav ul li a {
     height: 5px;
     background-image: linear-gradient(to right, #6b1e1e, #f88e34);
 }
+/* Candidate Box Styling */
+.candidate {
+    background-color: #f5eded;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: flex;                /* Use flexbox to control the layout */
+    justify-content: space-between;/* Ensure space between text and radio button */
+    align-items: center;           /* Vertically align items */
+}
+
+/* Candidate Label Styling */
+.candidate label {
+    display: inline-block;
+    flex-grow: 1;                  /* Allow the candidate text to take up remaining space */
+    text-align: left;              /* Align text to the left */
+}
+
+/* Radio Button Styling */
+.candidate input[type="radio"] {
+    margin-left: auto;             /* Push the radio button to the right */
+    margin-right: 10px;            /* Add space between the button and the edge */
+}
