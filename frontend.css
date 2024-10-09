@@ -33,7 +33,7 @@ body {
 }
 
 .logo-text {
-    margin-left: 10px; /* Add spacing between logos and text */
+    margin-left: 5px; /* Reduced spacing between logos and text */
 }
 
 .logo-text h1 {
@@ -86,38 +86,45 @@ nav ul li a {
     margin: 20px auto;
     text-align: center;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 15px; /* Increased radius for rounder edges */
     font-weight: bold;
     transition: background-color 0.3s ease;
     color: white;
 }
+
 /* Home button */
 .home-button {
     width: 50%;
     padding: 10px;
     background-color: #8b0000; /* Red color */
 }
+
 /* File Your Candidacy button */
 .candidacy-button {
     width: 40%;
     padding: 15px;
     background-color: #004d99; /* Different color for candidacy */
 }
+
 .home-button:hover {
     background-color: #6b0000; /* Darker red on hover */
 }
+
 .candidacy-button:hover {
     background-color: #003366; /* Darker blue on hover */
 }
+
 /* Download PDF Application button */
 .download-button {
     width: 50%;
     padding: 20px;
-    background-color: #8b2324; /* red color */
+    background-color: #8b2324; /* Red color */
 }
+
 .download-button:hover {
     background-color: #8b2324; /* Red on hover */
 }
+
 .button:hover {
     background-color: #6b0000; /* Darker red on hover */
 }
@@ -159,10 +166,12 @@ body {
     background-position: right center;
     background-repeat: no-repeat;
 }
+
 .LSPU-LB h1, .LSPU-LB h2 {
     margin: 0;
     color: #ffffff; /* Changed font color to white */
 }
+
 /* Navigation Styles */
 nav {
     background-color: rgba(255, 255, 255, 0.8);
@@ -188,9 +197,10 @@ nav a {
     text-decoration: none;
     color: white;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 15px; /* Increased radius for rounder edges */
     transition: background-color 0.3s;
 }
+
 /* Centering the buttons */
 .center-container {
     display: flex;
@@ -204,7 +214,7 @@ nav a {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px; /* Space between logos and text */
+    gap: 15px; /* Adjusted gap between logos and text */
 }
 
 /* Circular Logos */
