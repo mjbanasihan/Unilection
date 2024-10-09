@@ -6,6 +6,16 @@
     <title>CCS Student Council Election</title>
     <link rel="stylesheet" href="voting.css">
     <style>
+        /* Button Styles */
+        .button {
+            display: inline-block;
+            padding: 8px 15px; /* Reduced padding for smaller buttons */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 5px 0; /* Add margin for spacing between buttons */
+        }
         /* Add background image to the election title section */
         .election-title {
             background-image: url('COLLEGE OF COMPUTER STUDIES.jpg'); /* Add your image path here */
@@ -81,6 +91,7 @@
             <p>UNTIL 5 PM ONLY</p>
         </div>
         
+        <!-- Voting Form -->
         <form id="votingForm">
             <div class="positions">
                 <div class="position">
@@ -135,11 +146,11 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Submit Button INSIDE the form -->
+            <button type="submit" class="submit-btn">Submit Vote</button>
         </form>
     
-    <!-- Submit Button -->
-    <button type="submit" class="submit-btn">Submit Vote</button>
-
     <!-- JavaScript for Form Submission -->
     <script>
         document.getElementById('votingForm').addEventListener('submit', function(e) {
