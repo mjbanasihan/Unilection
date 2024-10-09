@@ -1,0 +1,250 @@
+:root {
+    --vote-title-width: 250px; /* Default width for the vote title shape */
+    --vote-title-height: 50px; /* Default height for the vote title shape */
+    --vote-title-padding: 10px; /* Default padding for the title container */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* Default background color */
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed; /* Ensure the background stays in place while scrolling */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('bg.png'); /* Add your background image here */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the background image */
+    filter: blur(8px); /* Apply blur effect */
+    z-index: -1; /* Place it behind other content */
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency to see blurred background */
+    backdrop-filter: blur(2px); /* Apply a subtle blur to the container for a frosted glass effect */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+header {
+    background-color: #1a237e;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.top-above-rectangle {
+    width: 100%;
+    height: 5px;
+    background-image: linear-gradient(to right, #6b1e1e, #f88e34);
+}
+.logo-title {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%; /* Make the logo round */
+}
+
+.title {
+    font-size: 1.2em;
+}
+
+.profile-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Make the profile icon round */
+}
+
+nav {
+    background-color: #f0f0f0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.active {
+    background-color: #8b0000;
+    color: white;
+    padding: 5px 10px;
+}
+
+.vote-confirmation {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+/* New container for the vote title */
+.vote-title-container {
+    background-color: #8b0000; /* Background color of the title */
+    color: white;
+    padding: var(--vote-title-padding); /* Use variable for padding */
+    border-radius: 20px; /* Make edges rounded */
+    width: var(--vote-title-width); /* Use variable for width */
+    height: var(--vote-title-height); /* Use variable for height */
+    display: flex; /* Allow for centering */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    margin: 0 auto; /* Center the title container */
+    margin-bottom: 20px; /* Added margin to create space below the title */
+}
+
+.vote-title {
+    font-size: 1.5em; /* Font size for the title */
+    text-align: center; /* Center text inside title */
+}
+
+.vote-details {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 800px; /* Optional: Set a maximum width */
+    margin-left: auto;
+    margin-right: auto; /* Center the .vote-details */
+}
+
+.vote-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 5px 0;
+    font-size: 1.1em; /* Adjust the font size if necessary */
+    text-align: center; /* Center content inside vote-row */
+}
+
+.vote-row:nth-child(odd) {
+    background-color: #ffe6e6;
+}
+
+.position {
+    font-weight: bold;
+    text-align: left;
+    flex: 1;
+}
+
+.candidate {
+    text-align: center;
+    flex: 1;
+    background-color: #f5eded;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+/* Buttons section */
+.buttons {
+    display: flex;
+    justify-content: space-between; /* Space between left and right button */
+    align-items: center; /* Center the buttons vertically */
+    margin: 20px auto 0; /* Margin above the buttons */
+    max-width: 800px; /* Align with the .vote-details width */
+}
+
+/* Example of centering both buttons together */
+.center-buttons {
+    justify-content: center; /* Centers both buttons horizontally */
+    gap: 20px; /* Adds horizontal spacing if buttons are aligned horizontally */
+}
+
+/* Example of aligning both buttons to the right */
+.align-right-buttons {
+    justify-content: flex-end; /* Aligns both buttons to the right */
+    gap: 400px; /* Adds spacing between the buttons */
+}
+
+/* Example of aligning both buttons to the left */
+.align-left-buttons {
+    justify-content: flex-start; /* Aligns both buttons to the left */
+    gap: 20px; /* Adds spacing between the buttons */
+}
+/* Common button styles */
+.button {
+    display: block;
+    margin: 20px auto; /* Center buttons horizontally */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px; /* Increased radius for rounder edges */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    color: white;
+    padding: 10px 20px; /* Added padding for button height */
+}
+
+/* Home button */
+.btn-home {
+    background-color: #8b0000; /* Red color */
+}
+
+/* Vote button */
+.btn-vote {
+    background-color: #004d99; /* Different color for vote */
+}
+
+/* Hover effects */
+.btn-home:hover {
+    background-color: #6b0000; /* Darker red on hover */
+}
+
+.btn-vote:hover {
+    background-color: #003366; /* Darker blue on hover */
+}
+/* Back button styling */
+.btn-back {
+    background-color: #1a237e;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    width: 200px; /* Set a consistent width for the buttons */
+    border-radius: 15px; /* Increased radius for rounder edges */
+}
+
+/* Submit button styling */
+.btn-submit {
+    background-color: #e67300;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    width: 200px; /* Set a consistent width for the buttons */
+    border-radius: 15px; /* Increased radius for rounder edges */
+}
+.vote-row.president,
+.vote-row.executive-secretary,
+.vote-row.auditor,
+.vote-row.creative-designer {
+    background-color: white; /* Change background color to white */
+}
