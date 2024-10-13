@@ -29,108 +29,128 @@
     color: #333; 
 }
 
-/* Modal Styles */
+/* Modal styles */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0, 0, 0, 0.5); 
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; 
-    padding: 30px; /* Increased padding */
-    border: 1px solid #888;
-    max-width: 600px; /* Set a maximum width */
-    width: 90%; /* Responsive width */
-    min-height: 200px; /* Minimum height */
-    text-align: center; 
-    border-radius: 8px; 
+    position: relative; /* For proper positioning */
+    max-width: 600px; /* Set a max-width for the modal */
+    max-height: 80vh; /* Set a max-height for the modal */
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin: 10% auto; /* Center the modal */
+    padding: 20px; /* Padding inside the modal */
+    background-color: white; /* Background color */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
 }
 
-.close-button {
+
+/* Close button styles */
+.close {
     color: #aaa;
-    float: right; 
+    float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close-button:hover,
-.close-button:focus {
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-#ballotTitle {
-    width: 80%; 
-    padding: 10px; 
-    margin: 10px 0; 
+/* Group styles */
+.group {
     border: 1px solid #ccc; 
     border-radius: 5px; 
+    padding: 15px; 
+    margin-bottom: 15px; 
 }
 
-#addPosition {
-    background-color: #6b1e1e; 
-    color: white; 
-    border: none; 
-    padding: 5px 10px; 
-    cursor: pointer; 
-    border-radius: 5px; 
+#ballotTitle {
+    width: 100%; /* Set the input width to 100% of its parent container */
+    max-width: 500px; /* Set a max-width for larger screens */
+    padding: 10px; /* Increase padding for a wider feel */
+    border-radius: 4px; 
+    border: 1px solid #ccc; 
+    margin-bottom: 15px; /* Space below the input */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
 }
 
-#addPositiont:hover {
-    background-color: #f88e34; 
+/* New styles for candidate indentation */
+.candidates-container {
+    margin-left: 20px; /* Indent candidates container */
 }
 
-.add-position-section {
-    margin: 20px 0; /* Margin for spacing */
+.candidate {
+    margin-left: 20px; /* Additional indent for candidates */
 }
 
-.add-position-section label {
-    margin-right: 10px; /* Space between label and dropdown */
+label {
+    display: block; /* Ensure labels stack vertically */
+    margin-top: 10px; /* Space between labels */
 }
 
-.add-candidate-section {
-    margin: 20px 0; /* Margin for spacing */
+/* Label styles */
+label {
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: bold; 
 }
 
-.add-candidate-section input {
-    width: 45%; /* Width of the input fields */
-    padding: 10px; /* Padding for the input */
-    margin: 10px 5px; /* Space around the input */
-    border: 1px solid #ccc; /* Border for the input */
-    border-radius: 5px; /* Rounded corners */
+/* Dropdown styles */
+select {
+    width: calc(100% - 10px); /* Full width minus some padding */
+    padding: 5px; 
+    margin-bottom: 10px; 
+    border-radius: 4px; 
+    border: 1px solid #ccc; 
 }
 
-#addCandidate {
-    background-color: #6b1e1e; 
-    color: white; 
-    border: none; 
-    padding: 5px 10px; 
-    cursor: pointer; 
-    border-radius: 5px; 
+/* Button styles */
+.btn-add-group{
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #f88e34;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px; /* Rounded corners */  
+}
+.btn-save-ballot {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px; /* Rounded corners */
 }
 
-#addCandidate:hover {
-    background-color: #f88e34; 
+.btn-add-group:hover,
+.btn-save-ballot:hover {
+    background-color: #45a049;
 }
 
-#submitBallot {
-    background-color: #6b1e1e; 
-    color: white; 
-    border: none; 
-    padding: 10px 15px; 
-    cursor: pointer; 
-    border-radius: 5px; 
+/* Candidate styles */
+.candidates-container {
+    margin-top: 10px; 
 }
 
-#submitBallot:hover {
-    background-color: #f88e34; 
+/* Flexbox for aligning buttons */
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Space out the buttons */
+    margin-top: 20px; 
 }

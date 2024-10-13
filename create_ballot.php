@@ -52,7 +52,7 @@
                 <span class="nav-link">Ballots</span>
                     <ul class="dropdown">
                         <li><a href="position.php">Position</a></li>
-                        <li><a href="Candidates">Candidate</a></li>
+                        <li><a href="candidate.php">Candidate</a></li>
                         <li><a href="create_ballot.php">Ballot Sheet</a></li>
                     </ul>
             <li class="hideOnMobile"><a href="results">Results</a></li>
@@ -76,12 +76,269 @@
     </nav>
     
     <div class="create-ballot-container">
+        <!-- Button to open the modal -->
         <button class="btn-create-ballot" onclick="openModal()">
             <i class="fas fa-plus"></i>
         </button>
         <span class="create-ballot-text">Create Ballot Box</span>
+
+        <!-- Modal Section -->
+        <div id="createBallotModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Create Ballot</h2>
+
+            <!-- Ballot Title -->
+            <label for="ballotTitle">Ballot Title:</label>
+            <input type="text" id="ballotTitle" placeholder="Enter ballot title">
+
+            <!-- Button to Add Group (Position and Candidates) -->
+            <div id="groupsContainer"></div>
+
+            <div class="button-container">
+                <button class="btn-add-group" onclick="addGroup()">Add Group</button>
+                <button class="btn-save-ballot">Save Ballot</button>
+            </div>
+        </div>
     </div>
 
-    <script src='create_ballot.js'></script>
+    <script>
+    // Open modal
+        function openModal() {
+            document.getElementById("createBallotModal").style.display = "block";
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById("createBallotModal").style.display = "none";
+        }
+
+        // Fetch positions from the database
+        async function fetchPositions() {
+            try {
+                const response = await fetch('api.php'); // Ensure this points to your positions endpoint
+                if (!response.ok) {
+                    throw new Error('Error fetching positions: ' + response.statusText);
+                }
+                const positions = await response.json();
+                console.log('Positions:', positions); // Log the fetched positions to the console
+                return positions;
+            } catch (error) {
+                console.error('Error:', error);
+                return [];
+            }
+        }
+
+        // Fetch candidates for a given position
+        async function fetchCandidatesByPosition(positionName) {
+            try {
+                const response = await fetch(`api.php?position=${positionName}`); // Ensure the correct path to api.php
+                if (!response.ok) {
+                    throw new Error('Error fetching candidates for position: ' + response.statusText);
+                }
+                return await response.json(); // Assuming candidates include { candidate_name, candidate_partylist }
+            } catch (error) {
+                console.error('Error:', error);
+                return [];
+            }
+        }
+
+        // Add group of position and candidates
+        // Add group of position only with candidate dropdown and party list
+        async function addGroup() {
+            const groupsContainer = document.getElementById("groupsContainer");
+
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'group';
+
+            // Create Position Dropdown for Group
+            const positionLabel = document.createElement('label');
+            positionLabel.innerHTML = 'Position:';
+            const positionSelect = document.createElement('select');
+
+            // Fetch and populate positions in the dropdown
+            const positions = await fetchPositions();
+            if (positions.length > 0) {
+                positions.forEach(pos => {
+                    const option = document.createElement('option');
+                    option.value = pos.position_name;
+                    option.textContent = pos.position_name;
+                    positionSelect.appendChild(option);
+                });
+            } else {
+                const option = document.createElement('option');
+                option.value = '';
+                option.textContent = 'No positions available';
+                positionSelect.appendChild(option);
+            }
+
+            // Create container for candidates and party list
+            const candidatesContainer = document.createElement('div');
+            candidatesContainer.className = 'candidates-container';
+
+            // Load candidates when the position changes
+            positionSelect.onchange = function () {
+                loadCandidatesForPosition(this.value, candidatesContainer);
+            };
+
+            // Add Candidate Button
+            const addCandidateButton = document.createElement('button');
+            addCandidateButton.textContent = 'Add Candidate';
+            addCandidateButton.onclick = function () {
+                addCandidate(candidatesContainer, positionSelect); // Call addCandidate function
+            };
+
+            // Append elements to the group div
+            groupDiv.appendChild(positionLabel);
+            groupDiv.appendChild(positionSelect);
+            groupDiv.appendChild(candidatesContainer);
+            groupDiv.appendChild(addCandidateButton); // Add the button to the group div
+
+            // Append group to the container
+            groupsContainer.appendChild(groupDiv);
+
+            // Trigger candidates loading if a position is already selected
+            if (positions.length > 0) {
+                loadCandidatesForPosition(positions[0].position_name, candidatesContainer);
+            }
+        }
+    // Load candidates based on the selected position
+        async function loadCandidatesForPosition(positionName, candidatesContainer) {
+            candidatesContainer.innerHTML = '';  // Clear previous candidates
+
+            try {
+                const candidates = await fetchCandidatesByPosition(positionName);
+                console.log('Candidates for position', positionName, ':', candidates); // Log candidates
+
+                // Create dropdown for candidates
+                const candidateLabel = document.createElement('label');
+                candidateLabel.innerHTML = 'Candidate Name:';
+                const candidateSelect = document.createElement('select');
+                candidateSelect.innerHTML = `<option value="" disabled selected>Select Candidate</option>`;
+
+                if (candidates.length > 0) {
+                    candidates.forEach(candidate => {
+                        const option = document.createElement('option');
+                        option.value = candidate.candidate_name;  // Set value to candidate name or ID if needed
+                        option.textContent = candidate.candidate_name;  // Display candidate name
+                        candidateSelect.appendChild(option);
+                    });
+
+                    // Party List Dropdown
+                    const partyListLabel = document.createElement('label');
+                    partyListLabel.innerHTML = 'Party List:';
+                    const partyListSelect = document.createElement('select');
+                    partyListSelect.innerHTML = `<option value="" disabled selected>Select Party List</option>`;
+
+                    // Populate party list based on selected candidate
+                    candidateSelect.onchange = function () {
+                        const selectedCandidate = candidates.find(c => c.candidate_name === this.value);
+                        partyListSelect.innerHTML = `<option value="" disabled selected>Select Party List</option>`; // Reset party list options
+
+                        if (selectedCandidate) {
+                            // Create an option for the party list
+                            const partyOption = document.createElement('option');
+                            partyOption.value = selectedCandidate.candidate_partylist; // Assuming candidate_partylist exists
+                            partyOption.textContent = selectedCandidate.candidate_partylist; // Assuming candidate_partylist is a string
+                            partyListSelect.appendChild(partyOption);
+                        }
+                    };
+
+                    // Append candidate and party list dropdowns to the candidatesContainer
+                    candidatesContainer.appendChild(candidateLabel);
+                    candidatesContainer.appendChild(candidateSelect);
+                    candidatesContainer.appendChild(partyListLabel);
+                    candidatesContainer.appendChild(partyListSelect);
+                } else {
+                    // Show "No Candidate Applied" in the dropdown
+                    const option = document.createElement('option');
+                    option.value = '';
+                    option.textContent = 'No Candidate Applied';
+                    candidateSelect.appendChild(option);
+                    candidatesContainer.appendChild(candidateLabel);
+                    candidatesContainer.appendChild(candidateSelect);
+                }
+
+            } catch (error) {
+                console.error('Error loading candidates:', error);
+            }
+        }
+
+        // Function to add a new candidate dynamically
+        async function addCandidate(candidatesContainer, positionSelect) {
+            const candidateDiv = document.createElement('div');
+            candidateDiv.className = 'candidate';
+
+            // Candidate Name Dropdown
+            const candidateNameLabel = document.createElement('label');
+            candidateNameLabel.innerHTML = 'Candidate Name:';
+            const candidateNameSelect = document.createElement('select');
+            candidateNameSelect.innerHTML = `<option value="" disabled selected>Select Candidate</option>`;
+
+            // Party List Dropdown
+            const partyListLabel = document.createElement('label');
+            partyListLabel.innerHTML = 'Party List:';
+            const partyListSelect = document.createElement('select');
+            partyListSelect.innerHTML = `<option value="" disabled selected>Select Party List</option>`;
+
+            // Get the currently selected position
+            const position = positionSelect.value;
+
+            // Load candidates for the selected position
+            try {
+                const candidates = await fetchCandidatesByPosition(position);
+                console.log('Candidates for position', position, ':', candidates); // Log candidates
+
+                if (candidates && candidates.length > 0) {
+                    candidates.forEach(candidate => {
+                        const option = document.createElement('option');
+                        option.value = candidate.candidate_name;  // Set value to candidate name
+                        option.textContent = candidate.candidate_name;  // Display candidate name
+                        candidateNameSelect.appendChild(option);
+                    });
+
+                    // Populate party list dropdown when a candidate is selected
+                    candidateNameSelect.onchange = function () {
+                        const selectedCandidate = candidates.find(c => c.candidate_name === this.value);
+                        partyListSelect.innerHTML = ''; // Clear previous party list options
+
+                        if (selectedCandidate) {
+                            // Create option for party list
+                            const option = document.createElement('option');
+                            option.value = selectedCandidate.candidate_partylist;  // Set to party list name or ID if needed
+                            option.textContent = selectedCandidate.candidate_partylist;  // Display party list name
+                            partyListSelect.appendChild(option);
+                        }
+                    };
+                } else {
+                    const option = document.createElement('option');
+                    option.value = '';
+                    option.textContent = 'No candidates available for this position';
+                    candidateNameSelect.appendChild(option);
+                }
+            } catch (error) {
+                console.error('Error loading candidates:', error);
+            }
+
+            // Append all candidate inputs to candidateDiv
+            candidateDiv.appendChild(candidateNameLabel);
+            candidateDiv.appendChild(candidateNameSelect);
+            candidateDiv.appendChild(partyListLabel);
+            candidateDiv.appendChild(partyListSelect); // Append the party list dropdown
+
+            // Append candidateDiv to the candidatesContainer
+            candidatesContainer.appendChild(candidateDiv);
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function (event) {
+            const modal = document.getElementById("createBallotModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+
 </body>
 </html>
