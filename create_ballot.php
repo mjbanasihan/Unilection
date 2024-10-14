@@ -7,6 +7,75 @@
     <title>Manage Admin</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="create_ballot.css">
+    <style>
+        /* Example CSS for the saved ballots wrapper */
+        .saved-ballots-wrapper {
+            background-color: #f9f9f9; /* Light background for contrast */
+            border: 1px solid #ccc; /* Light border for definition */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Space around the contents */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            width: 100%; /* Full width of the parent */
+            max-width: 700px; /* Maximum width for larger screens */
+            margin: 20px auto; /* Center horizontally with space above and below */
+        }
+
+        .saved-ballots-container h3 {
+            text-align: center;
+            color: #6b1e1e;
+            margin-bottom: 15px; /* Space below the header */
+            font-size: 2em; /* Larger font size for the header */
+        }
+
+        .ballot-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .ballot-actions {
+            margin-top: 10px; /* Space above buttons */
+        }
+
+        .ballot-actions button {
+            border: none; /* Remove border */
+            background-color: #4CAF50; /* Change background color */
+            color: white; /* Text color */
+            padding: 5px 10px; /* Smaller padding */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Inline block */
+            font-size: 14px; /* Smaller font size */
+            margin: 2px; /* Smaller margin */
+            cursor: pointer; /* Pointer cursor on hover */
+            border-radius: 4px; /* Optional: Rounded corners */
+        }
+
+        /* Optional: Add hover effect */
+        .ballot-actions button:hover {
+            background-color: #45a049; /* Darker background on hover */
+        }
+
+        .ballot-actions .btn-view {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+
+        .ballot-actions .btn-publish {
+            background-color: #008CBA; /* Blue */
+            color: white;
+        }
+
+        .ballot-actions .btn-edit {
+            background-color: #f0ad4e; /* Yellow */
+            color: white;
+        }
+
+        .ballot-actions .btn-delete {
+            background-color: #f44336; /* Red */
+            color: white;
+        }
+
+    </style>
 </head>
 <header>
     <div class="top-above-rectangle"></div>
@@ -74,30 +143,42 @@
             </li>
         </ul>
     </nav>
-    
-    <div class="create-ballot-container">
-        <!-- Button to open the modal -->
-        <button class="btn-create-ballot" onclick="openModal()">
-            <i class="fas fa-plus"></i>
-        </button>
-        <span class="create-ballot-text">Create Ballot Box</span>
 
-        <!-- Modal Section -->
-        <div id="createBallotModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Create Ballot</h2>
+    <div class="main-container">
+        <!-- Create Ballot Container -->
+        <div class="create-ballot-container">
+            <!-- Button to open the modal -->
+            <button class="btn-create-ballot" onclick="openModal()">
+                <i class="fas fa-plus"></i>
+            </button>
+            <span class="create-ballot-text">Create Ballot Box</span>
 
-            <!-- Ballot Title -->
-            <label for="ballotTitle">Ballot Title:</label>
-            <input type="text" id="ballotTitle" placeholder="Enter ballot title">
+            <!-- Modal Section -->
+            <div id="createBallotModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Create Ballot</h2>
 
-            <!-- Button to Add Group (Position and Candidates) -->
-            <div id="groupsContainer"></div>
+                    <!-- Ballot Title -->
+                    <label for="ballotTitle">Ballot Title:</label>
+                    <input type="text" id="ballotTitle" placeholder="Enter ballot title">
 
-            <div class="button-container">
-                <button class="btn-add-group" onclick="addGroup()">Add Group</button>
-                <button class="btn-save-ballot">Save Ballot</button>
+                    <!-- Button to Add Group (Position and Candidates) -->
+                    <div id="groupsContainer"></div>
+
+                    <div class="button-container">
+                        <button class="btn-add-group" onclick="addGroup()">Add Group</button>
+                        <button class="btn-save-ballot">Save Ballot</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saved Ballots Container -->
+        <div class="saved-ballots-container">
+            <h3>Saved Ballots (Drafts)</h3>
+            <div class="saved-ballots-wrapper">
+                <div id="savedBallots"></div>
             </div>
         </div>
     </div>
@@ -172,14 +253,9 @@
                 positionSelect.appendChild(option);
             }
 
-            // Create container for candidates and party list
+            // Create a container for candidates
             const candidatesContainer = document.createElement('div');
             candidatesContainer.className = 'candidates-container';
-
-            // Load candidates when the position changes
-            positionSelect.onchange = function () {
-                loadCandidatesForPosition(this.value, candidatesContainer);
-            };
 
             // Add Candidate Button
             const addCandidateButton = document.createElement('button');
@@ -191,17 +267,13 @@
             // Append elements to the group div
             groupDiv.appendChild(positionLabel);
             groupDiv.appendChild(positionSelect);
-            groupDiv.appendChild(candidatesContainer);
+            groupDiv.appendChild(candidatesContainer); // Append the candidates container
             groupDiv.appendChild(addCandidateButton); // Add the button to the group div
 
             // Append group to the container
             groupsContainer.appendChild(groupDiv);
-
-            // Trigger candidates loading if a position is already selected
-            if (positions.length > 0) {
-                loadCandidatesForPosition(positions[0].position_name, candidatesContainer);
-            }
         }
+
     // Load candidates based on the selected position
         async function loadCandidatesForPosition(positionName, candidatesContainer) {
             candidatesContainer.innerHTML = '';  // Clear previous candidates
@@ -337,8 +409,95 @@
                 modal.style.display = "none";
             }
         }
+
+        async function saveBallot() {
+            const ballotTitle = document.getElementById("ballotTitle").value;
+            const groups = document.querySelectorAll('.group');
+            
+            const positions = [];
+            const candidates = [];
+            const partyLists = [];
+            
+            // Loop through each group to collect positions and candidates
+            groups.forEach(group => {
+                const positionSelect = group.querySelector('select'); // Get position select
+                const positionName = positionSelect.value;
+                positions.push(positionName); // Add position name to positions array
+
+                const candidatesContainer = group.querySelector('.candidates-container');
+                const candidateSelect = candidatesContainer.querySelector('select'); // Get candidate select
+                const partyListSelect = candidatesContainer.querySelectorAll('select')[1]; // Get party list select
+                
+                candidates.push(candidateSelect.value); // Add candidate name to candidates array
+                partyLists.push(partyListSelect.value); // Add party list to partyLists array
+            });
+
+            // Prepare data to send to the server
+            const data = {
+                ballotTitle: ballotTitle,
+                positions: positions,
+                candidates: candidates,
+                partyLists: partyLists
+            };
+
+            // Send data to the server using fetch API
+            try {
+                const response = await fetch('save_ballot.php', { // Ensure this points to your PHP script
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data), // Convert data object to JSON string
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+
+                const result = await response.text(); // Get response text
+                console.log(result); // Log success message from PHP
+
+                // After saving, update the UI to show saved draft
+                displayDraftBallot(ballotTitle, positions, candidates, partyLists);
+            } catch (error) {
+                console.error('Error saving ballot:', error);
+            }
+        }
+
+        // Call saveBallot function when clicking the Save button
+        document.querySelector('.btn-save-ballot').onclick = saveBallot;
+
+        // Function to display saved draft ballots below the create ballot button
+
+
+        async function fetchSavedBallots() {
+            const response = await fetch('saved_ballots.php'); // Assume 'saved_ballots.php' fetches saved ballots
+            const savedBallotsContainer = document.getElementById('savedBallots');
+            savedBallotsContainer.innerHTML = await response.text(); // Insert the fetched ballots into the container
+        }
+
+        // Call this function to refresh the saved ballots after saving a new one
+        fetchSavedBallots();
+
+        document.querySelector('.btn-save-ballot').addEventListener('click', async function() {
+            const ballotTitle = document.getElementById('ballotTitle').value;
+            const formData = new FormData();
+            formData.append('ballotTitle', ballotTitle);
+            // Add other form data like positions, candidates, etc.
+
+            const response = await fetch('save_ballot.php', { // Assume 'save_ballot.php' processes the form
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                // Fetch and display the updated list of saved ballots
+                fetchSavedBallots();
+                alert('Ballot saved as draft!');
+            } else {
+                alert('Error saving ballot!');
+            }
+        });
     </script>
-
-
-</body>
-</html>
+<body>
+<html>
