@@ -128,7 +128,7 @@
             <li class="hideOnMobile">
                 <span class="nav-link">Students</span>
                 <ul class="dropdown">
-                    <li><a href="voters">Voters</a></li>
+                    <li><a href="voters.php">Voters</a></li>
                     <li><a href="status">Year Status</a></li>
                     <li><a href="manage_student.php">Manage</a></li>
                 </ul>
@@ -296,31 +296,10 @@
                         candidateSelect.appendChild(option);
                     });
 
-                    // Party List Dropdown
-                    const partyListLabel = document.createElement('label');
-                    partyListLabel.innerHTML = 'Party List:';
-                    const partyListSelect = document.createElement('select');
-                    partyListSelect.innerHTML = `<option value="" disabled selected>Select Party List</option>`;
-
-                    // Populate party list based on selected candidate
-                    candidateSelect.onchange = function () {
-                        const selectedCandidate = candidates.find(c => c.candidate_name === this.value);
-                        partyListSelect.innerHTML = `<option value="" disabled selected>Select Party List</option>`; // Reset party list options
-
-                        if (selectedCandidate) {
-                            // Create an option for the party list
-                            const partyOption = document.createElement('option');
-                            partyOption.value = selectedCandidate.candidate_partylist; // Assuming candidate_partylist exists
-                            partyOption.textContent = selectedCandidate.candidate_partylist; // Assuming candidate_partylist is a string
-                            partyListSelect.appendChild(partyOption);
-                        }
-                    };
-
-                    // Append candidate and party list dropdowns to the candidatesContainer
+                    // Append candidate dropdown to the candidatesContainer
                     candidatesContainer.appendChild(candidateLabel);
                     candidatesContainer.appendChild(candidateSelect);
-                    candidatesContainer.appendChild(partyListLabel);
-                    candidatesContainer.appendChild(partyListSelect);
+
                 } else {
                     // Show "No Candidate Applied" in the dropdown
                     const option = document.createElement('option');
@@ -336,6 +315,8 @@
             }
         }
 
+
+        // Function to add a new candidate dynamically
         // Function to add a new candidate dynamically
         async function addCandidate(candidatesContainer, positionSelect) {
             const candidateDiv = document.createElement('div');
@@ -346,12 +327,6 @@
             candidateNameLabel.innerHTML = 'Candidate Name:';
             const candidateNameSelect = document.createElement('select');
             candidateNameSelect.innerHTML = `<option value="" disabled selected>Select Candidate</option>`;
-
-            // Party List Dropdown
-            const partyListLabel = document.createElement('label');
-            partyListLabel.innerHTML = 'Party List:';
-            const partyListSelect = document.createElement('select');
-            partyListSelect.innerHTML = `<option value="" disabled selected>Select Party List</option>`;
 
             // Get the currently selected position
             const position = positionSelect.value;
@@ -368,20 +343,6 @@
                         option.textContent = candidate.candidate_name;  // Display candidate name
                         candidateNameSelect.appendChild(option);
                     });
-
-                    // Populate party list dropdown when a candidate is selected
-                    candidateNameSelect.onchange = function () {
-                        const selectedCandidate = candidates.find(c => c.candidate_name === this.value);
-                        partyListSelect.innerHTML = ''; // Clear previous party list options
-
-                        if (selectedCandidate) {
-                            // Create option for party list
-                            const option = document.createElement('option');
-                            option.value = selectedCandidate.candidate_partylist;  // Set to party list name or ID if needed
-                            option.textContent = selectedCandidate.candidate_partylist;  // Display party list name
-                            partyListSelect.appendChild(option);
-                        }
-                    };
                 } else {
                     const option = document.createElement('option');
                     option.value = '';
@@ -392,15 +353,14 @@
                 console.error('Error loading candidates:', error);
             }
 
-            // Append all candidate inputs to candidateDiv
+            // Append candidate inputs to candidateDiv
             candidateDiv.appendChild(candidateNameLabel);
             candidateDiv.appendChild(candidateNameSelect);
-            candidateDiv.appendChild(partyListLabel);
-            candidateDiv.appendChild(partyListSelect); // Append the party list dropdown
 
             // Append candidateDiv to the candidatesContainer
             candidatesContainer.appendChild(candidateDiv);
         }
+
 
         // Close the modal when clicking outside of it
         window.onclick = function (event) {
@@ -413,36 +373,41 @@
         async function saveBallot() {
             const ballotTitle = document.getElementById("ballotTitle").value;
             const groups = document.querySelectorAll('.group');
-            
-            const positions = [];
-            const candidates = [];
-            const partyLists = [];
-            
-            // Loop through each group to collect positions and candidates
+
+            const data = {
+                ballotTitle: ballotTitle,
+                positions: [] // Initialize positions as an array of objects
+            };
+
+            // Loop through each group to collect positions and their respective candidates
             groups.forEach(group => {
                 const positionSelect = group.querySelector('select'); // Get position select
                 const positionName = positionSelect.value;
-                positions.push(positionName); // Add position name to positions array
+
+                // Initialize an object for the current position
+                const positionData = {
+                    position_name: positionName,
+                    candidates: [] // Initialize candidates for this position
+                };
 
                 const candidatesContainer = group.querySelector('.candidates-container');
-                const candidateSelect = candidatesContainer.querySelector('select'); // Get candidate select
-                const partyListSelect = candidatesContainer.querySelectorAll('select')[1]; // Get party list select
-                
-                candidates.push(candidateSelect.value); // Add candidate name to candidates array
-                partyLists.push(partyListSelect.value); // Add party list to partyLists array
-            });
+                const candidateSelects = candidatesContainer.querySelectorAll('select'); // Get all candidate selects
 
-            // Prepare data to send to the server
-            const data = {
-                ballotTitle: ballotTitle,
-                positions: positions,
-                candidates: candidates,
-                partyLists: partyLists
-            };
+                // Loop through each candidate select to collect candidate names
+                candidateSelects.forEach((candidateSelect) => {
+                    const candidateName = candidateSelect.value; // Get candidate name
+                    if (candidateName) { // Ensure a valid candidate name is selected
+                        positionData.candidates.push(candidateName); // Add candidate to the position
+                    }
+                });
+
+                // Add the position data to the main data object
+                data.positions.push(positionData); // Add position data
+            });
 
             // Send data to the server using fetch API
             try {
-                const response = await fetch('save_ballot.php', { // Ensure this points to your PHP script
+                const response = await fetch('save_ballot.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -458,7 +423,7 @@
                 console.log(result); // Log success message from PHP
 
                 // After saving, update the UI to show saved draft
-                displayDraftBallot(ballotTitle, positions, candidates, partyLists);
+                displayDraftBallot(ballotTitle, data.positions);
             } catch (error) {
                 console.error('Error saving ballot:', error);
             }
@@ -468,36 +433,45 @@
         document.querySelector('.btn-save-ballot').onclick = saveBallot;
 
         // Function to display saved draft ballots below the create ballot button
-
-
         async function fetchSavedBallots() {
-            const response = await fetch('saved_ballots.php'); // Assume 'saved_ballots.php' fetches saved ballots
+            const response = await fetch('saved_ballots.php');
             const savedBallotsContainer = document.getElementById('savedBallots');
             savedBallotsContainer.innerHTML = await response.text(); // Insert the fetched ballots into the container
         }
 
         // Call this function to refresh the saved ballots after saving a new one
         fetchSavedBallots();
+        
+        async function deleteBallot(ballotId) {
+            console.log("Delete function called for ballot ID: " + ballotId); // Check if function is called
+            if (confirm('Are you sure you want to delete this ballot?')) {
+                try {
+                    const response = await fetch('delete_ballot.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ ballot_id: ballotId }), // Ensure the key matches what's expected in PHP
+                    });
 
-        document.querySelector('.btn-save-ballot').addEventListener('click', async function() {
-            const ballotTitle = document.getElementById('ballotTitle').value;
-            const formData = new FormData();
-            formData.append('ballotTitle', ballotTitle);
-            // Add other form data like positions, candidates, etc.
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
 
-            const response = await fetch('save_ballot.php', { // Assume 'save_ballot.php' processes the form
-                method: 'POST',
-                body: formData
-            });
+                    const result = await response.text(); // Get response text
+                    console.log(result); // Log success message from PHP
 
-            if (response.ok) {
-                // Fetch and display the updated list of saved ballots
-                fetchSavedBallots();
-                alert('Ballot saved as draft!');
-            } else {
-                alert('Error saving ballot!');
+                    if (result.trim() === 'success') { // Check for success response
+                        location.reload(); // Reload the page to show updated list
+                    } else {
+                        alert('Error deleting the ballot: ' + result); // Show specific error
+                    }
+                } catch (error) {
+                    console.error('Error deleting ballot:', error);
+                    alert('An error occurred while deleting the ballot.');
+                }
             }
-        });
+        }
     </script>
 <body>
 <html>
