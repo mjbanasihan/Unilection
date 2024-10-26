@@ -163,6 +163,14 @@
                     <label for="ballotTitle">Ballot Title:</label>
                     <input type="text" id="ballotTitle" placeholder="Enter ballot title">
 
+                    <!-- Voting Start Date and Time -->
+                    <label for="startDateTime">Start Date and Time:</label>
+                    <input type="datetime-local" id="startDateTime" required>
+
+                    <!-- Voting End Date and Time -->
+                    <label for="endDateTime">End Date and Time:</label>
+                    <input type="datetime-local" id="endDateTime" required>
+
                     <!-- Button to Add Group (Position and Candidates) -->
                     <div id="groupsContainer"></div>
 
@@ -372,13 +380,17 @@
 
         async function saveBallot() {
             const ballotTitle = document.getElementById("ballotTitle").value;
+            const startDateTime = document.getElementById("startDateTime").value;
+            const endDateTime = document.getElementById("endDateTime").value;
             const groups = document.querySelectorAll('.group');
 
             const data = {
                 ballotTitle: ballotTitle,
-                positions: [] // Initialize positions as an array of objects
-            };
-
+                startDateTime: startDateTime,
+                endDateTime: endDateTime,
+                positions: []
+            }
+            
             // Loop through each group to collect positions and their respective candidates
             groups.forEach(group => {
                 const positionSelect = group.querySelector('select'); // Get position select
