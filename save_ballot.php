@@ -2,7 +2,7 @@
 // Connect to the database
 $servername = "localhost";
 $username = "root";
-$password = "";  // XAMPP default, update if necessary
+$password = "";  
 $dbname = "election";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -18,11 +18,13 @@ $data = json_decode(file_get_contents("php://input"), true);
 // Fetch the form data
 $ballotTitle = $data['ballotTitle'];
 $positions = $data['positions'];
+$startDateTime = $data['startDateTime']; // Use the key as defined in JavaScript
+$endDateTime = $data['endDateTime']; // Use the key as defined in JavaScript
 
 // Insert the ballot title first
-$sql = "INSERT INTO ballots (ballot_title, status) VALUES (?, 'draft')";
+$sql = "INSERT INTO ballots (ballot_title, start_date_time, end_date_time,  status) VALUES (?, ?, ?, 'draft')";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $ballotTitle);
+$stmt->bind_param("sss", $ballotTitle, $startDateTime, $endDateTime);
 
 if ($stmt->execute()) {
     $ballotId = $stmt->insert_id;  // Get the ID of the inserted ballot
@@ -43,8 +45,15 @@ if ($stmt->execute()) {
                 $sql = "INSERT INTO ballot_candidates (position_id, candidate_name) VALUES (?, ?)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("is", $positionId, $candidate);
-                $stmt->execute();  // Execute the prepared statement
+                
+                if (!$stmt->execute()) { // Check for errors on each candidate insertion
+                    echo "Error inserting candidate: " . $stmt->error;
+                    exit; // Exit if an error occurs
+                }
             }
+        }else {
+            echo "Error inserting position: " . $stmt->error;
+            exit; // Exit if an error occurs
         }
     }
 
