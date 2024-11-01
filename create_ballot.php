@@ -52,26 +52,26 @@
 
         /* Optional: Add hover effect */
         .ballot-actions button:hover {
-            background-color: #45a049; /* Darker background on hover */
+            background-color: #45a049; 
         }
 
         .ballot-actions .btn-view {
-            background-color: #4CAF50; /* Green */
+            background-color: #4CAF50; 
             color: white;
         }
 
         .ballot-actions .btn-publish {
-            background-color: #008CBA; /* Blue */
+            background-color: #008CBA; 
             color: white;
         }
 
         .ballot-actions .btn-edit {
-            background-color: #f0ad4e; /* Yellow */
+            background-color: #f0ad4e; 
             color: white;
         }
 
         .ballot-actions .btn-delete {
-            background-color: #f44336; /* Red */
+            background-color: #f44336; 
             color: white;
         }
 
@@ -124,7 +124,7 @@
                         <li><a href="candidate.php">Candidate</a></li>
                         <li><a href="create_ballot.php">Ballot Sheet</a></li>
                     </ul>
-            <li class="hideOnMobile"><a href="results">Results</a></li>
+            <li class="hideOnMobile"><a href="results.php">Results</a></li>
             <li class="hideOnMobile">
                 <span class="nav-link">Students</span>
                 <ul class="dropdown">
@@ -484,6 +484,43 @@
                 }
             }
         }
+
+        async function publishBallot(ballotId) {
+            if (confirm('Are you sure you want to publish this ballot?')) {
+                try {
+                    const response = await fetch('publish_ballot.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ ballot_id: ballotId }), // Send the ballot ID
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+
+                    const result = await response.text(); // Get response text
+                    console.log(result); // Log success message from PHP
+
+                    if (result.trim() === 'success') {
+                        alert('Ballot published successfully!'); // Notify the user
+                        fetchSavedBallots(); // Refresh the saved ballots list
+                    } else {
+                        alert('Error publishing the ballot: ' + result); // Show specific error
+                    }
+                } catch (error) {
+                    console.error('Error publishing ballot:', error);
+                    alert('An error occurred while publishing the ballot.');
+                }
+            }
+        }
+
+        // Call publishBallot function when clicking the Publish button
+        document.querySelector('.btn-publish-ballot').onclick = function() {
+            const ballotId = this.getAttribute('data-ballot-id'); // Get the ballot ID from a data attribute
+            publishBallot(ballotId);
+        };
     </script>
 <body>
 <html>
