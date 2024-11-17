@@ -232,7 +232,6 @@
             }
         }
 
-        // Add group of position and candidates
         // Add group of position only with candidate dropdown and party list
         async function addGroup() {
             const groupsContainer = document.getElementById("groupsContainer");
@@ -501,11 +500,26 @@
                     }
 
                     const result = await response.text(); // Get response text
-                    console.log(result); // Log success message from PHP
+                    console.log(result); // Log the result for debugging
 
-                    if (result.trim() === 'success') {
-                        alert('Ballot published successfully!'); // Notify the user
-                        fetchSavedBallots(); // Refresh the saved ballots list
+                    if (result.trim() === 'success') { // Check for success response
+                        // Find the corresponding ballot DOM element
+                        const ballotElement = document.querySelector(`#ballot-${ballotId}`);
+                        if (ballotElement) {
+                            // Update the UI to reflect the published status
+                            const statusBadge = ballotElement.querySelector('.status-badge');
+                            if (statusBadge) {
+                                statusBadge.textContent = 'Published';
+                                statusBadge.classList.add('published'); // Add styling for published
+                            }
+
+                            // Disable the publish button
+                            const publishButton = ballotElement.querySelector('.btn-publish');
+                            if (publishButton) {
+                                publishButton.disabled = true;
+                                publishButton.textContent = 'Published';
+                            }
+                        }
                     } else {
                         alert('Error publishing the ballot: ' + result); // Show specific error
                     }
@@ -515,7 +529,6 @@
                 }
             }
         }
-
         // Call publishBallot function when clicking the Publish button
         document.querySelector('.btn-publish-ballot').onclick = function() {
             const ballotId = this.getAttribute('data-ballot-id'); // Get the ballot ID from a data attribute
