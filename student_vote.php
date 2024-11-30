@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch published ballots
-$sql = "SELECT ballot_id, ballot_title FROM ballots WHERE status = 'published'"; // Ensure this reflects your logic
+$sql = "SELECT ballot_id, ballot_title, start_date_time, end_date_time FROM ballots WHERE status = 'published'"; 
 $result = $conn->query($sql);
 
 $ballots = [];
@@ -121,6 +121,14 @@ function getBallotDetails($ballotId) {
             <?php foreach ($ballots as $ballot): ?>
                 <div class="ballot-rectangle">
                     <h3><?php echo htmlspecialchars($ballot['ballot_title']); ?></h3>
+                    <p><strong><h4>Voting Duration: </h4></strong> 
+                        <h5><?php 
+                        // Format and display the start and end times
+                        $start = new DateTime($ballot['start_date_time']);
+                        $end = new DateTime($ballot['end_date_time']);
+                        echo $start->format('F j, Y, g:i a') . " - " . $end->format('F j, Y, g:i a');
+                        ?><h5>
+                    </p>
                     <button onclick="openModal('<?php echo htmlspecialchars($ballot['ballot_title']); ?>', <?php echo $ballot['ballot_id']; ?>)">Vote Now</button>
                 </div>
             <?php endforeach; ?>
