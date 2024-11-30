@@ -13,7 +13,7 @@
     border: 2px solid #ddd; /* Light gray border */
     border-radius: 8px; /* Rounded corners */
     padding: 20px; /* Inner padding */
-    width: 280px; /* Fixed width for rectangles */
+    width: 450px; /* Fixed width for rectangles */
     text-align: center; /* Center text inside the rectangle */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effects */
@@ -27,9 +27,21 @@
 
 /* Ballot Title */
 .ballot-rectangle h3 {
-    font-size: 18px;
-    color: #333; /* Dark gray text */
-    margin-bottom: 15px; /* Space below the title */
+    font-size: 28px;
+    color: rgb(187, 10, 10); /* Dark gray text */
+    margin-bottom: 5px; /* Space below the title */
+}
+
+.ballot-rectangle h4 {
+    font-size: 13px;
+    color: #514949; /* Dark gray text */
+    margin-bottom: 5px; /* Space below the title */
+}
+
+.ballot-rectangle h5 {
+    font-size: 13px;
+    color: #000000; /* Dark gray text */
+    margin-bottom: 5px; /* Space below the title */
 }
 
 /* Vote Now Button */
