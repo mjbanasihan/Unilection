@@ -62,7 +62,7 @@ function getBallotDetails($ballotId) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Students</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="student_vote.css">
+    <link rel="stylesheet" href="student_vote(2).css">
 </head>
 
 <header>
@@ -121,7 +121,7 @@ function getBallotDetails($ballotId) {
             <?php foreach ($ballots as $ballot): ?>
                 <div class="ballot-rectangle">
                     <h3><?php echo htmlspecialchars($ballot['ballot_title']); ?></h3>
-                    <button onclick="showBallot(<?php echo $ballot['ballot_id']; ?>)">Vote Now</button>
+                    <button onclick="openModal('<?php echo htmlspecialchars($ballot['ballot_title']); ?>', <?php echo $ballot['ballot_id']; ?>)">Vote Now</button>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
@@ -129,13 +129,19 @@ function getBallotDetails($ballotId) {
         <?php endif; ?>
     </div>
 
-    <div id="ballotDetails" style="display:none;">
-        <h2>Ballot Details</h2>
-        <div id="positionsAndCandidates"></div>
-        <button onclick="submitVote()">Submit Vote</button>
+    <!-- Modal for displaying ballot details -->
+    <div id="ballotDetailsModal" style="display:none;">
+        <div class="modal-content">
+            <h2 id="ballotTitle">Ballot Title</h2> <!-- This will display the title dynamically -->
+            <div id="positionsAndCandidates"></div>
+            <button onclick="submitVote()">Submit Vote</button>
+            <button onclick="closeModal()">Close</button>
+        </div>
     </div>
 
     <script>
+
+        // Function to show ballot details in modal
         async function showBallot(ballotId) {
             try {
                 const response = await fetch('get_ballot_details.php?ballot_id=' + ballotId);
@@ -148,7 +154,7 @@ function getBallotDetails($ballotId) {
 
                 // Display the ballot title and candidates
                 const positionsAndCandidates = document.getElementById("positionsAndCandidates");
-                positionsAndCandidates.innerHTML = '';
+                positionsAndCandidates.innerHTML = ''; // Clear previous content
 
                 for (const [position, candidates] of Object.entries(details)) {
                     positionsAndCandidates.innerHTML += `<h3>${position}</h3>`;
@@ -157,13 +163,15 @@ function getBallotDetails($ballotId) {
                     });
                 }
 
-                document.getElementById("ballotDetails").style.display = 'block';
+                // Show the modal
+                document.getElementById("ballotDetailsModal").style.display = 'block';
             } catch (error) {
                 console.error('Error fetching ballot details:', error);
                 alert('Failed to load ballot details. Please try again.');
             }
         }
 
+        // Submit vote function
         async function submitVote() {
             const ballotData = {};
             const positionLabels = document.querySelectorAll('#positionsAndCandidates h3');
@@ -190,12 +198,51 @@ function getBallotDetails($ballotId) {
                 }
 
                 alert('Vote cast successfully!');
-                document.getElementById("ballotDetails").style.display = 'none'; // Hide ballot details
+                document.getElementById("ballotDetailsModal").style.display = 'none'; // Hide modal after voting
             } catch (error) {
                 console.error('Error casting vote:', error);
                 alert('An error occurred while casting your vote.');
             }
         }
+
+        async function openModal(ballotTitle, ballotId) {
+            document.getElementById('ballotTitle').textContent = ballotTitle;
+            document.getElementById('ballotDetailsModal').style.display = 'flex'; // Show modal using flex
+            showBallot(ballotId); // Populate the ballot details
+        }
+
+        // Close modal function
+        function closeModal() {
+            document.getElementById("ballotDetailsModal").style.display = 'none';
+        }
+
+        // Close modal when the user clicks outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById("ballotDetailsModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Function to open the modal
+        function showBallotDetails() {
+            document.getElementById("ballotDetailsModal").style.display = "block";
+        }
+
+        // Function to close the modal
+        function closeBallotDetails() {
+            document.getElementById("ballotDetailsModal").style.display = "none";
+        }
+
+        // Close modal when the user clicks outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById("ballotDetailsModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+
     </script>
 </body>
 </html>
