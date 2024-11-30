@@ -1,3 +1,4 @@
+/* Ballots Container */
 .ballots-container {
     display: flex;
     flex-wrap: wrap;
@@ -6,49 +7,143 @@
     justify-content: center; /* Center items horizontally */
 }
 
+/* Ballot Rectangle */
 .ballot-rectangle {
-    background-color: #f0f0f0; /* Rectangle background color */
-    border: 1px solid #ccc; /* Border for the rectangle */
+    background-color: #ffffff; /* White background for rectangles */
+    border: 2px solid #ddd; /* Light gray border */
     border-radius: 8px; /* Rounded corners */
     padding: 20px; /* Inner padding */
-    width: 300px; /* Fixed width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-    text-align: center; /* Center text */
+    width: 280px; /* Fixed width for rectangles */
+    text-align: center; /* Center text inside the rectangle */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effects */
 }
 
+/* Ballot Rectangle Hover Effect */
+.ballot-rectangle:hover {
+    transform: translateY(-5px); /* Lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+}
+
+/* Ballot Title */
 .ballot-rectangle h3 {
-    margin-bottom: 10px; /* Space below title */
+    font-size: 18px;
+    color: #333; /* Dark gray text */
+    margin-bottom: 15px; /* Space below the title */
 }
 
+/* Vote Now Button */
 .ballot-rectangle button {
-    background-color: #007bff; /* Button color */
-    color: white; /* Text color */
-    border: none; /* Remove border */
-    padding: 10px 15px; /* Button padding */
-    border-radius: 5px; /* Rounded button */
-    cursor: pointer; /* Pointer on hover */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Button padding */
+    font-size: 16px; /* Font size for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
+/* Button Hover Effect */
 .ballot-rectangle button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #45a049; /* Slightly darker green */
 }
 
-/* Simple styles for modal */
-#ballotDetailsModal {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-    display: none;
-}
+/* Modal content */
 .modal-content {
     background-color: white;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: 1% auto; /* Adjust the margin for a closer position */
+    padding: 10px; /* Add padding to the modal */
+    width: 70%; /* Adjust width */
+    border-radius: 8px;
+    max-width: 700px;
+    position: relative;
+    z-index: 100;
+}
+
+/* Modal Header */
+.modal-content h2 {
+    text-align: center;
+    color: maroon;
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+/* Position styling */
+#positionsAndCandidates {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: maroon;
+}
+
+#positionsAndCandidates h3 {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+/* Line above and below position names */
+#positionsAndCandidates h3::before,
+#positionsAndCandidates h3::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background-color: #333;
+    margin: 2px 0;
+}
+
+/* Candidate name styling */
+#positionsAndCandidates label {
+    display: block;
+    font-size: 16px;
+    text-align: left; /* Align text to the left for better visual consistency */
+    color: black; /* Override color to make candidate names black */
+}
+
+/* Button styles for modal */
+.modal-content button {
+    background-color: #e68900; /* Green */
+    color: white;
+    padding: 8px 16px; /* Smaller button padding */
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 20px;
+    width: auto;
+    font-size: 14px; /* Smaller font size */
+    display: inline-block; /* Buttons beside each other */
+    margin-right: 10px; /* Space between buttons */
+}
+
+/* Submit Button (Orange) */
+.modal-content button[type="submit"] {
+    background-color: #FFA500; /* Orange background */
+    color: white;
+}
+
+/* Submit Button Hover Effect */
+.modal-content button[type="submit"]:hover {
+    background-color: #e68900; /* Darker orange on hover */
+}
+
+/* Close Button (Gray) */
+button.close {
+    background-color: #808080; /* Gray background */
+    color: white;
+}
+
+/* Close Button Hover Effect */
+button.close:hover {
+    background-color: #5c5c5c; /* Darker gray on hover */
+}
+
+/* Prevent affecting other buttons outside the modal */
+button {
+    outline: none;
+}
+
+/* For closing the modal by clicking outside */
+#ballotDetailsModal .modal-content {
+    cursor: pointer;
 }
